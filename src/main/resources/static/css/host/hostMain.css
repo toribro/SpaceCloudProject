@@ -1,0 +1,42 @@
+#wrapper{
+    width: 1200px;
+    margin: 10px auto;
+}
+.host-main{
+    width: 1100px;
+    height: 750px;
+    display: flex;
+}
+.left-side{
+    margin: auto;
+    margin-left : 10px;
+    width: 50% ;
+}
+.right-side{
+    width: 50%;
+    margin : auto;
+
+}
+.right-side img {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    width: 500px;
+    height: 500px;
+
+}
+.left-side > div > h1{
+    font-size: 40px;
+}
+.margin-left-30px{
+    margin-left: 30px;
+}
+.left-side button {
+    width: 150px;
+    height: 50px;
+    border: none;
+    color: #FFFFFF;
+    background-color: #704DE4;
+    border-radius: 15px;
+    font-size: 18px;
+}

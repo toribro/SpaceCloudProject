@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH ROOMMOAH</title>
+
+    <!-- Bootstrap CSS -->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">-->
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/91f9609a45.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+ 알림 메시지
+<script th:if="${alertMsg != null}">
+    alert([[${alertMsg}]]);
+</script>
+
+<div th:fragment="menubarHost" class="menubar-host" >
+
+    <div class="wrapper">
+        <!-- 로그인 전 -->
+        <div th:if="${loginUser == null}">
+            <div class="login-area">
+                <div id="left-bar">
+                    <i class="fa-solid fa-bars fa-xl" onclick="openNav()"></i>
+                </div>
+                <h2 class="menubar-logo">KH ROOMMOAH</h2>
+                <div id="right-bar" align="end">
+                    <a th:href="@{/enrollForm.me}">회원가입</a> | <a th:href="@{/loginForm.me}">로그인</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 로그인 후 -->
+        <div th:if="${loginUser != null}">
+            <div class="login-area">
+                <div id="left-bar">
+                    <i class="fa-solid fa-bars fa-xl" onclick="openNav()"></i>
+                </div>
+                <h2 class="menubar-logo">KH ROOMMOAH</h2>
+                <div id="right-bar" align="end">
+                    <a th:href="@{/myPage.me}" th:text="${loginUser.nickName}"></a> | <a th:href="@{/logout.me}">로그아웃</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 사이드 메뉴 -->
+    <div id="mySidenav" class="side-menu sidenav" align="center">
+        <div class="side-profile">
+            <div class="x-icon">
+                <i class="fa-solid fa-x fa-xl" onclick="closeNav()"></i>
+            </div>
+            <div th:if="${loginUser != null}">
+                <div class="side-profile-picture">
+                    <img class="profile-img" th:src="@{/resources/teo/noLoginProfile.JPG}" alt="defaultProfileImg">
+                </div>
+                <div class="side-profile-nickname">
+                    <b th:text="${loginUser.nickName}"></b>
+                    <p><a th:href="@{/myPage.me}">프로필 관리 ></a></p>
+                </div>
+            </div>
+            <div th:if="${loginUser == null}">
+                <div class="side-profile-picture">
+                    <img class="profile-img" th:src="@{/resources/teo/noLoginProfile.JPG}" alt="defaultProfileImg">
+                </div>
+                <div class="side-profile-nickname">
+                    <a th:href="@{/loginForm.me}">로그인 해주세요!</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-logo">
+            <h3>KH ROOMMOAH</h3>
+        </div>
+
+        <div class="side-list">
+            <table>
+                <tr class="spaceHome" align="center">
+                    <th>홈</th>
+                </tr>
+                <tr align="center">
+                    <th class="myspaces">내 공간</th>
+                </tr>
+                <tr align="center" class="general">
+                    <th>일반게시판</th>
+                </tr>
+                <tr align="center" class="notice">
+                    <th>공지사항</th>
+                </tr>
+            </table>
+        </div>
+
+        <div th:if="${loginUser != null}">
+            <a th:href="@{/logout.me}">로그아웃</a>
+        </div>
+
+        <div class="side-tohost">
+            <p> <a th:href="@{/}">스페이스클라우드로 이동></a>  </p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
