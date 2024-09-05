@@ -1,0 +1,272 @@
+@media (max-width: 1200px) {
+    #main, #temp {
+        width: 100%;
+    }
+    #section_1, #section_2 {
+        width: auto;
+    }
+}
+
+@media (max-width: 780px) {
+    #main {
+        flex-direction: column;
+    }
+    #section_1, #section_2 {
+        width: 100%;
+    }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+#temp {
+    width: 1200px;
+    height: 60px;
+    border: solid goldenrod;
+    margin: auto;
+}
+
+#main {
+    width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+#section_1 {
+    height: 100%;
+    width: 800px;
+    margin-right: 20px;
+}
+
+#space_id {
+    display: flex;
+    justify-content: space-between;
+}
+
+.space {
+    display: grid;
+    grid-template-rows: repeat(2, 200px);
+    column-gap: 50px;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.space p > span {
+    display: inline-block;
+    width: 300px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.title {
+    margin-top: 50px;
+}
+
+.text {
+    font-size: 30px;
+}
+
+.text2 {
+    font-size: 20px;
+}
+
+.line {
+    background-color: yellow;
+}
+
+#list > ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    border: solid 1px #7A36E9;
+    margin: auto;
+}
+
+#list li {
+    padding: 10px;
+}
+
+#list a {
+    text-decoration: none;
+}
+
+#space_comment {
+    display: grid;
+    grid-template-rows: repeat(1, 500px);
+    column-gap: 50px;
+    font-size: 50px;
+    height: 100%;
+    align-items: center;
+}
+
+#space_comment > .img_div {
+    width: calc(100% * 2);
+    overflow: hidden;
+    display: flex;
+    animation: slide infinite 60s linear;
+    height: 100%;
+}
+
+#space_comment img {
+    width: calc(100% / 2);
+    flex-shrink: 0;
+    height: 100%;
+}
+
+@keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.img_div {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 50px;
+    align-items: center;
+    transition: all 1s ease-in;
+}
+
+.quest {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+#section_2 {
+    width: 400px;
+}
+
+#section_2 div {
+    margin-top: 20px;
+}
+
+#space_option_comment {
+    border: 1px solid grey;
+}
+
+#detail_space {
+    display: flex;
+    justify-content: space-between;
+}
+
+#choiced input {
+    border: none;
+}
+
+#detail_space_choice, #detail_myspace {
+    border: solid 1px #704DE4;
+    padding: 15px;
+}
+
+#time_choice {
+    display: none;
+}
+
+.time_box {
+    height: 100%;
+    width: 100%;
+}
+
+.time {
+    font-size: 20px;
+    width: 100%;
+}
+
+.price {
+    font-size: 20px;
+}
+
+#time_choice > ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    overflow: auto;
+}
+
+#space_option_kind {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 15px;
+    padding: 15px;
+}
+
+.option_kind {
+    padding: 3px 3px;
+    text-align: center;
+}
+
+.button {
+    background-color: #704DE4;
+    color: #FFFFFF;
+    border: solid #FFFFFF;
+}
+
+.heartColor {
+    color: red;
+}
+
+#reservation_btn {
+    background-color: #2d10e6;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+#category_btn {
+    background-color: #dabc23;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+#count_person {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 60%;
+    color: #999999;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#plus, #minus {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#plus {
+    background-image: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+#minus {
+    background-image: linear-gradient(to right, #f53505, rgb(204, 157, 148));
+}
+
+#plus:hover, #minus:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#plus:active, #minus:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12);
+}

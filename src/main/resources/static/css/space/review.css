@@ -1,0 +1,40 @@
+#space_review{
+     overflow: auto;
+        /* border:solid blue; */
+               
+}
+
+#review_table{
+    width:100%;
+    height:100%;
+}
+
+#review_body{
+    width:100%;
+}
+
+.reivew_body{
+    width: 100%;
+}
+
+
+
+
+.review_list{
+    padding: 8px;
+}
+
+
+#reivew_content,#content{
+    resize:none;
+    /* resize:vertical; */
+    height: 100%;
+}
+.GuestReviewButon{
+    background-color: #f9f9f9;
+    color:red;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
