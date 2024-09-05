@@ -25,6 +25,10 @@ public class HostController {
     public String hostUpdateForm(){
         return "host/hostUpdateForm";
     }
+    @GetMapping("/spacelist")
+    public String hostSpaceList(){
+        return "host/hostSpaceList";
+    }
 
     @PostMapping("/enroll")
     public String hostEnrollPost(){

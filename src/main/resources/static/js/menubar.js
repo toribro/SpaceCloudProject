@@ -26,12 +26,12 @@ $(function(){
 
 // 찜한 공간으로 이동
     $(".picked-list").click(function(){
-        location.href = "[[@{/pickedview.sp}]]";
+        location.href = "/guest/pickedList";
     });
 
 // 예약 페이지로 이동
     $(".book-list").click(function(){
-        location.href = "[[@{/reservation.me(cpage=1)}]]";
+        location.href = "/guest/reservationList";
     });
 
 

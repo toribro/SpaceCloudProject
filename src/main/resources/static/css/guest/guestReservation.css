@@ -1,0 +1,116 @@
+#wrapper {
+    width: 1200px;
+    margin: auto;
+}
+
+.reservation-header {
+    width: 100%;
+    height: 50px;
+    background: #704DE4;
+    color: white;
+    text-align: center;
+    line-height: 55px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.reservation-body {
+    margin-right: 150px;
+    width: 100%;
+    height: 1000px;
+}
+
+.total-rsvt-area {
+    margin-top: 50px;
+    width: 100%;
+    height: 80px;
+    background: #4D4D4D;
+    padding: 30px;
+}
+
+.total-rsvt-area > p {
+    color: white;
+    font-size: large;
+}
+
+.thead-dark {
+    font-size: 18px;
+    color: #969696;
+}
+
+.reservation-list {
+    cursor: pointer;
+}
+
+.modal-title {
+    font-weight: bold;
+    color: #969696;
+    padding-top: 10px;
+}
+
+.btn-rserv {
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    text-decoration: underline;
+    color: rgb(4, 133, 207);
+}
+
+.close {
+    color: red;
+    font-size: 30px;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+.modal-header {
+    display: flex;
+}
+
+.modal-dialog {
+    width: 700px;
+}
+
+.modal-body {
+    display: flex;
+    border: 1px solid rgb(201, 43, 69);
+    width: 100%;
+}
+
+.table-area {
+    width: 100%;
+}
+
+.modal-tb-css {
+    width: 100%;
+}
+
+.modal-tb-css tr td {
+    color: #4D4D4D;
+    font-size: 20px;
+    padding-bottom: 5px;
+    padding-top: 20px;
+}
+
+.modal-tb-css tr {
+    border-bottom: 1px solid #e6e1e1;
+}
+
+.trtd {
+    font-weight: bold;
+}
+
+.img-area {
+    border: 1px solid;
+    width: 100%;
+}
+
+.paging-area button {
+    background-color: white;
+    border: 1px solid rgb(180, 180, 180);
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding-bottom: 4px;
+    font-weight: 500;
+}

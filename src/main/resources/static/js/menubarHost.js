@@ -10,7 +10,7 @@ $(function(){
     });
 
     document.querySelector(".spaceHome").addEventListener("click", function() {
-        location.href = "/main.ho";
+        location.href = "/host";
     });
 
     document.querySelector(".notice").addEventListener("click", function() {
@@ -22,7 +22,7 @@ $(function(){
     });
 
     document.querySelector(".myspaces").addEventListener("click", function() {
-        location.href = "/myspace.sp";
+        location.href = "/host/spacelist";
     });
 
 })

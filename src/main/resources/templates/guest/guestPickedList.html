@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH ROOMMOAH</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/91f9609a45.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/resources/teo/favicon-16x16.png}">
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/guest/guestPickedList.css}">
+    <script th:src="@{/js/guest/guestPickedList.js}"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menubar.css}">
+    <script th:src="@{/js/menubar.js}"></script>
+</head>
+
+<body>
+
+<!-- 메뉴바를 타임리프로 변경 -->
+<div th:replace="~{/menubar :: menubar}"></div>
+
+<div id="wrapper">
+    <div id="title">
+        <h1>찜한 공간</h1>
+    </div>
+
+    <section class="pickedMain">
+        <!-- 타임리프 each 구문을 사용하여 pickeds 목록을 순회 -->
+        <div class="info-preview" th:each="picked : ${pickeds}" th:onclick="'detailView(' + ${picked?.spaceNo} + ')'">
+            <div class="space-picture" style="border:  1px solid black;">
+                <img th:src="@{${picked.spaceMimg}}" alt="썸네일" width="100%" height="100%">
+            </div>
+            <div class="space-info">
+                <div class="title-area" style="margin-bottom: 5px;">
+                    <b th:text="${picked.spaceName}"></b>
+                    <span><i class="fa-regular fa-thumbs-up"></i> <span th:text="${picked.spaceCount}"></span></span>
+                </div>
+                <div>
+                    <p>
+                        <span th:text="${picked.spaceAddress}"></span><br>
+
+                        <!-- 공간 태그를 공백으로 나눈 후 순회 -->
+                        <span th:each="tag : ${#strings.split(picked.spaceTag, ' ')}">
+                                <a href="#" th:text="${tag}"></a> &nbsp;
+                            </span>
+                    </p>
+                </div>
+                <div class="price-info">
+                    <div><b th:text="${picked.spacePrice}"></b><span>원/시간</span></div>
+                    <span>최대 <span th:text="${picked.spaceCapacity}"></span>인</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
