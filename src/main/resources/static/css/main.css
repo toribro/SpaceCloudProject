@@ -1,0 +1,164 @@
+*{
+    box-sizing: border-box;
+}
+
+#wrapper{
+    width: 1200px;
+    margin: 10px auto;
+}
+.search-bar{
+    position: relative;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    width: 500px;
+}
+.search-bar input{
+    width: 500px;
+    border: 2px solid #704DE4;
+    border-radius: 20px;
+    padding-left: 20px;
+    height: 39px;
+}
+.search-bar > i{
+    color: #704DE4;
+    position: absolute;
+    right: 20px;
+}
+.search-option {
+    display: flex;
+    margin-top: 30px;
+}
+.option1 {
+    width: 75%;;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.option1 select, .option1 input{
+    width: 25%;
+    height: 38px;
+}
+.option2 {
+    width: 25%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.option2 div {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.option3{
+    margin-top :30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding-left: 20px;
+    padding-right: 10px;
+    border-bottom: 1px solid rgb(138, 138, 138);
+    height: 30px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
+.option3 div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.option3 div a {
+    font-size: 20px;
+}
+.option3 div select{
+    display: flex;
+    border: none;
+    font-size: 20px;
+}
+
+.main-grid{
+    place-items: center;
+    display: grid;
+    column-gap: 16px;
+    row-gap: 40px;
+}
+@media (max-width: 619px){
+    .main-grid{grid-template-columns: 1fr;}
+}
+
+@media (min-width: 620px) and (max-width: 949px){
+    .main-grid{grid-template-columns: 1fr 1fr;}
+}
+
+@media (min-width: 950px){
+    .main-grid{grid-template-columns: 1fr 1fr 1fr;}
+}
+
+.info-preview {
+    border: 1px solid rgb(180, 180, 180);
+    width: 360px;
+    height: 360px;
+}
+.space-picture{
+    height: 220px;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.space-info{
+    padding : 0 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgb(180, 180, 180);
+
+}
+/* .space-info p span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+} */
+.price-info{
+    display: flex;
+    justify-content: space-between;
+    align-items:baseline
+}
+.price-info>div>b{
+    font-size: 20px;
+    color: #704DE4;
+}
+.calender-select{
+    position: relative;
+}
+
+.calender {
+    width: 300px;
+    position: absolute;
+    top : 140px;
+    left: 48%
+}
+.info-preview{
+    cursor: pointer;
+}
+.space-info>b {
+    margin-bottom: 15px;
+}
+#search-btn, #place-Info, #people-count, #place-kind, #map-info {
+    cursor: pointer;
+}
+.paging-area button{
+    background-color : white;
+    border: 1px solid rgb(180, 180, 180);
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding-bottom: 4px;
+    font-weight : 500;
+}
+.title-area{
+    display: flex;
+    justify-content: space-between;
+}
+.map-marker{
+    width: 100%;
+}

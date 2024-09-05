@@ -1,0 +1,141 @@
+* {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+}
+.menubar-wrapper{
+    width: 1200px;
+    margin: 10px auto;
+
+}
+.login-area div {
+    width: 200px;
+}
+
+.login-area{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    height: 60px;
+    padding-top: 10px;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+#right-bar a:hover{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+#left-bar{
+    margin-left: 10px;
+}
+#left-bar i:hover{
+    cursor: pointer;
+}
+#right-bar{
+    margin-right: 10px;
+}
+.login-area h2{
+    font-family:'ZCOOL KuaiLe';
+    font-weight: bold;
+}
+.side-menu, .side-menu-host{
+
+    width: 300px;
+    background-color: rgb(233, 233, 233);
+}
+.side-profile {
+    width: 100%;
+    height: 130px;
+    background-color: #fed636;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+}
+.side-profile-picture{
+    width : 100px;
+    height : 100px;
+    border-radius: 50%;
+    background-color: #fed636;
+}
+.side-profile-nickname{
+    margin-left: 20px;
+}
+.side-logo, .side-tohost {
+    background-color: #704DE4;
+    color: white;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.side-logo>h3 {
+    font-family:'ZCOOL KuaiLe';
+    padding-top: 8px;
+}
+.side-list table {
+    width: 100%;
+    background-color: white;
+    cursor: pointer;
+}
+.side-list table th{
+    border: 1px solid rgb(204, 204, 204);
+    border-left: none;
+    border-right: none;
+    border-collapse: collapse;
+    height: 70px;
+}
+.side-tohost>p {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+.side-tohost {
+    cursor: pointer;
+}
+.side-menu{
+
+}
+.login-area{
+    margin-bottom: 30px;
+}
+
+.side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top:0;
+    left:0;
+    overflow-x: hidden;
+    transition: 0.4s;
+    padding-top: 69px;
+    border-right: 1px solid rgb(204, 204, 204);
+}
+.side-menu-host{
+    display:none;
+}
+.menubar-logo{
+    cursor: pointer;
+}
+.x-icon{
+    position: absolute;
+    top: 75px;
+    right: 8px;
+    color : rgb(126, 126, 126);
+    cursor: pointer;
+}
+.side-profile-picture {
+    display:table-cell;
+    vertical-align:middle;
+}
+ .profile-img {
+    max-width:100px;
+    max-height:100px;
+    border-radius: 50%;
+    margin-top: 3px;
+}
