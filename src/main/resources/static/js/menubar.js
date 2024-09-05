@@ -21,7 +21,7 @@ $(function(){
 
 // 일반 게시판 페이지로 이동
     $(".general").click(function(){
-        location.href = "[[@{/list.bo(cpage=1)}]]";
+        location.href = "/board/list";
     });
 
 // 찜한 공간으로 이동

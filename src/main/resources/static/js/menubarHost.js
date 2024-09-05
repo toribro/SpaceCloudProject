@@ -18,7 +18,7 @@ $(function(){
     });
 
     document.querySelector(".general").addEventListener("click", function() {
-        location.href = "/list.bo?cpage=1";
+        location.href = "/board/list";
     });
 
     document.querySelector(".myspaces").addEventListener("click", function() {
