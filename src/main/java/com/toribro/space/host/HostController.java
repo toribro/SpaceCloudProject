@@ -21,10 +21,15 @@ public class HostController {
     public String hostEnrollPre(){
         return "host/hostEnrollFormPre";
     }
+    @GetMapping("/update")
+    public String hostUpdateForm(){
+        return "host/hostUpdateForm";
+    }
 
     @PostMapping("/enroll")
     public String hostEnrollPost(){
 
         return "host/hostEnrollFormMain";
     }
+
 }

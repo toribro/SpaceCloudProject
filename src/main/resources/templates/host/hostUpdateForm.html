@@ -22,22 +22,25 @@
 
     <!--  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/resources/teo/favicon-16x16.png}">-->
 
-    <link rel="stylesheet"  type="text/css" th:href="@{/css/host/hostEnrollFormMain.css}">
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/host/hostUpdateForm.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/menubarHost.css}">
-    <script th:src="@{/js/host/hostEnrollFromMain.js}"></script>
+    <script th:src="@{/js/host/hostUpdateFrom.js}"></script>
     <script th:src="@{/js/menubarHost.js}"></script>
 </head>
 <body>
 <!-- Include Menubar -->
+
 <div th:replace="/menubarHost :: menubarHost"></div>
 
 <div id="wrapper">
     <br>
-    <form th:action="@{/spaceEnroll.sp}" method="POST" enctype="multipart/form-data">
+    <form th:action="@{/update.sp}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="userNo" th:value="${loginUser?.userNo}">
+        <input type="hidden" name="spaceNo" th:value="${sp?.spaceNo}">
+        <input type="hidden" name="spaceMimg" th:value="${sp?.spaceMimg}">
 
         <div class="login-top">
-            <h2>시설물 등록</h2>
+            <h2>시설물 수정</h2>
         </div>
 
         <br>
@@ -56,7 +59,7 @@
                 <td colspan="2" align="right"><span class="textCount1">0</span>/18자</td>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-name" class="input-text input-host1" name="spaceName" type="text" maxlength="18" placeholder="고유 업체명을 입력해주세요." required></td>
+                <td colspan="3"><input id="input-name" class="input-text input-host1" name="spaceName" type="text" maxlength="18" th:value="${sp?.spaceName}" placeholder="고유 업체명을 입력해주세요." required></td>
             </tr>
 
             <!-- 공간유형 -->
@@ -80,7 +83,7 @@
                 <td colspan="2" align="right"><span class="textCount2">0</span>/27자</td>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-intro1" class="input-text input-host2" name="spaceOneIntroduce" type="text" maxlength="27" placeholder="공간의 특장점을 한 문자응로 작성해주세요." required></td>
+                <td colspan="3"><input id="input-intro1" class="input-text input-host2" name="spaceOneIntroduce" type="text" maxlength="27" th:value="${sp?.spaceOneIntroduce}" placeholder="공간의 특장점을 한 문장으로 작성해주세요." required></td>
             </tr>
 
             <!-- 공간 소개 -->
@@ -89,7 +92,7 @@
                 <td colspan="2" align="right"><span class="textCount3">0</span>/500자</td>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-intro2" class="input-text input-host3" name="spaceIntroduce" type="text" maxlength="500" placeholder="게스트들에게 필요한 공간 정보를 상세하게 소개해주세요." required></td>
+                <td colspan="3"><input id="input-intro2" class="input-text input-host3" name="spaceIntroduce" type="text" maxlength="500" th:value="${sp?.spaceIntroduce}" placeholder="게스트들에게 필요한 공간 정보를 상세하게 소개해주세요." required></td>
             </tr>
 
             <!-- 공간 태그 -->
@@ -98,11 +101,11 @@
                 <td colspan="2" align="right">최대 5개</td>
             </tr>
             <tr>
-                <td colspan="2" class="body80"><input class="input-text" id="spaceTag" type="text" placeholder="게스트들이 선호할만한 주요 특징들을 키워드로 입력해주세요. (최대 5개)"></td>
+                <td colspan="2" class="body80"><input class="input-text" id="spaceTag" type="text" placeholder="게스트들이 선호할만한 주요 특징들을 입력해주세요."></td>
                 <td><button class="tag-btn" type="button" onclick="insertTag()">추가 ▼</button></td>
             </tr>
             <tr class="hidden-tag">
-                <td colspan="2" class="body80"><input class="input-text" type="text" name="spaceTag" readonly required></td>
+                <td colspan="2" class="body80"><input class="input-text" type="text" name="spaceTag" th:value="${sp?.spaceTag}" readonly required></td>
                 <td><button type="button" onclick="deleteTag()">삭제</button></td>
             </tr>
 
@@ -111,12 +114,8 @@
                 <th>대표 이미지<span class="red-color">*</span></th>
                 <td colspan="2" align="right">2048*1158 권장, 최대 3MB</td>
             </tr>
-            <tr class="main-img">
-                <td colspan="2" class="body80"><input class="input-text" name="spaceMimg" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, png)" disabled></td>
-                <td><button style="height: 50px;" type="button" onclick="chooseFile(1)">파일 첨부</button></td>
-            </tr>
-            <tr class="main-img-hidden">
-                <td colspan="2" class="body80"><img id="title-img" width="25%" height="170"></td>
+            <tr>
+                <td colspan="2" class="body80"><img  th:src="${sp?.spaceMimg}" id="title-img" width="25%" height="170"></td>
                 <td><button style="height: 50px;" type="button" onclick="chooseFile(1)">파일 수정</button></td>
             </tr>
 
@@ -126,11 +125,11 @@
                 <td colspan="2" align="right"></td>
             </tr>
             <tr>
-                <td colspan="2"><input id="spaceAddress" class="input-text" type="text" name="spaceAddress" placeholder="실제 서비스되는 공간의 주소를 입력해주세요." required readonly></td>
+                <td colspan="2"><input id="spaceAddress" class="input-text" type="text" name="spaceAddress" th:value="${sp?.spaceAddress}" required readonly></td>
                 <td><button type="button" onclick="searchAddr()">주소 검색</button></td>
             </tr>
             <tr>
-                <td colspan="2" class="body80"><input class="input-text" name="spaceDetailAddress" type="text" placeholder="상세주소" required></td>
+                <td colspan="2" class="body80"><input class="input-text" name="spaceDetailAddress" type="text" th:value="${sp?.spaceDetailAddress}" placeholder="상세주소" required></td>
             </tr>
 
             <!-- 가격 -->
@@ -138,17 +137,17 @@
                 <th>가격(1인 1시간 가격)<span class="red-color">*</span></th>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-price" class="input-text" name="spacePrice" type="number" placeholder="숫자만 입력해주세요. ex) 1000" min="0" step="100" required></td>
+                <td colspan="3"><input id="input-price" class="input-text" name="spacePrice" type="number" th:value="${sp?.spacePrice}" placeholder="숫자만 입력해주세요." min="0" step="100" required></td>
             </tr>
 
             <!-- 전화번호 -->
             <tr>
                 <th>전화번호<span class="red-color">*</span></th>
-                <th>수용 인원<span class="red-color">*</span></th>
+                <td colspan="1" align="right"><th>수용 인원<span class="red-color">*</span></th></td>
             </tr>
             <tr>
                 <td colspan="2"><input id="input-tel" class="input-text" type="text" name="spaceTel" th:value="${loginUser?.phone}" placeholder="'-' 없이 입력해주세요." required></td>
-                <td class="body80"><input class="input-text" name="spaceCapacity" type="number" placeholder="최대 인원" min="1" required></td>
+                <td class="body80"><input class="input-text" name="spaceCapacity" type="number" th:value="${sp?.spaceCapacity}" placeholder="최대 인원" min="1" required></td>
             </tr>
         </table>
 
@@ -156,8 +155,8 @@
 
         <!-- 제출 버튼 -->
         <div class="last-btns">
-            <button class="back-btn" type="button" onclick="backPage()">이전</button>
-            <button class="save-btn" type="button" onclick="clickSubmit()">저장</button>
+            <button class="back-btn" type="button" onclick="history.back()">취&nbsp&nbsp&nbsp&nbsp소</button>
+            <button class="save-btn" type="button" onclick="clickSubmit()">수&nbsp&nbsp&nbsp&nbsp정</button>
         </div>
     </form>
 </div>
