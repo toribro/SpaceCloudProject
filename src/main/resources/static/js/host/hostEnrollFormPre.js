@@ -1,0 +1,3 @@
+function backPage() {
+    location.href = "/";
+}

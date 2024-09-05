@@ -2,9 +2,136 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/91f9609a45.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+
+  <!--  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/resources/teo/favicon-16x16.png}">-->
+  <link rel="stylesheet"  type="text/css" th:href="@{/css/host/hostEnrollFormPre.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/menubarHost.css}">
+  <script th:src="@{/js/host/hostEnrollFormPre.js}"></script>
+  <script th:src="@{/js/menubarHost.js}"></script>
+
+  <title>KH ROOMMOAH</title>
 </head>
 <body>
+<!-- Include Menubar -->
+<div th:replace="/menubarHost :: menubarHost"></div>
 
+<div id="wrapper">
+  <br>
+  <div class="login-top">
+    <h2>시설물 등록</h2>
+  </div>
+
+  <div class="top-area"><p>공간 유형을 선택해주세요.</p></div>
+
+  <br><br><br>
+  <ul>
+    <li>공간 유형을 선택해주세요.</li>
+    <li>선택한 공간 용도 안에서, 등록한 공간에 적합한 유형은 모두 선택이 가능합니다.</li>
+    <li>검수 단계에서 검수 기준에 적합하지 않는 유형은 제외될 수 있습니다.</li>
+    <li>검수 신청 후, 공간 유형은 고객센터를 통해서만 변경이 가능하오니, 신중히 선택해주세요!</li>
+  </ul>
+  <br><br><br>
+  <form th:action="@{/host/enroll}" method="POST">
+    <table class="select-area">
+      <tr>
+        <td>
+          <label class="container">&nbsp&nbsp&nbsp파티룸
+            <input type="checkbox" id="party" name="spaceKind" value="파티룸">
+            <span class="checkmark"></span>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><p>최소 2인 이상 수용 가능한 독립적인 공간으로 파티가 가능한 공간</p></td>
+      </tr>
+      <tr>
+        <td>
+          <label class="container">&nbsp&nbsp&nbsp카페
+            <input type="checkbox" id="cafe" name="spaceKind" value="카페">
+            <span class="checkmark"></span>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><p>카페 전체를 대관하여 모임에 독립적으로 제공이 가능한 공간</p></td>
+      </tr>
+      <tr>
+        <td>
+          <label class="container">&nbsp&nbsp&nbsp강의실
+            <input type="checkbox" id="lecture" name="spaceKind" value="강의실">
+            <span class="checkmark"></span>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><p>학습 및 교육 목적으로 강의, 수업, 세미나로 활용할 수 있는 공간</p></td>
+      </tr>
+      <tr>
+        <td>
+          <label class="container">&nbsp&nbsp&nbsp회의실
+            <input type="checkbox" id="meeting" name="spaceKind" value="회의실">
+            <span class="checkmark"></span>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><p>비즈니스 목적으로 진행되는 회의, 워크숍 관련한 시설이 제공되는 공간</p></td>
+      </tr>
+      <tr>
+        <td>
+          <label class="container">&nbsp&nbsp&nbsp세미나실
+            <input type="checkbox" id="seminar" name="spaceKind" value="세미나실">
+            <span class="checkmark"></span>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><p>여럿이 함께 토론, 발표, 강연, 워크숍, 연수 등을 진행할 수 있는 시설이 제공되는 공간</p></td>
+      </tr>
+      <tr>
+        <td>
+          <label class="container">&nbsp&nbsp&nbsp스터디룸
+            <input type="checkbox" id="study" name="spaceKind" value="스터디룸">
+            <span class="checkmark"></span>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><p>스터디, 팀플, 공모전, 독서 등 학습 활동에 필요한 시설이 구비된 공간</p></td>
+      </tr>
+    </table>
+    <br><br>
+    <div class="buttons">
+      <button class="back-btn" type="button" onclick="backPage()">이전</button>
+      <button class="save-btn" type="submit">다음</button>
+    </div>
+  </form>
+</div>
+
+<!-- External JavaScript -->
+<script th:src="@{/resources/js/enrollSpace.js}"></script>
 </body>
 </html>
