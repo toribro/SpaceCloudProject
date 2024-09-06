@@ -1,4 +1,4 @@
-package com.toribro.space.guest;
+package com.toribro.space.controller.guest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,0 +1,89 @@
+#notice-wrapper {
+    width: 1200px;
+    margin: auto;
+}
+
+#table {
+    border-top: 1px solid #927f69;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+tr {
+    cursor: pointer;
+    padding: 16px;
+}
+
+th {
+    border-bottom: 1px solid rgb(201, 201, 201);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+td {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(201, 201, 201);
+}
+
+.title {
+    text-align: left;
+}
+
+#btn1, #btn2, #btn3 {
+    text-decoration: none;
+    border: 1px solid rgb(201, 201, 201);
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+    line-height: 32px;
+    color: black;
+    margin-left: 10px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#write-btn {
+    border: 1px solid rgb(201, 201, 201);
+    width: 70px;
+    height: 35px;
+    float: right;
+    line-height: 32px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+#btnList-area {
+    margin-top: 10px;
+}
+
+#search-area {
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+#selectbar {
+    border: 1px solid rgb(201, 201, 201);
+    width: 90px;
+    height: 35px;
+}
+
+#search-input {
+    border: 1px solid rgb(201, 201, 201);
+    width: 300px;
+    height: 35px;
+    margin-left: 10px;
+}
+
+#search-btn {
+    border: 1px solid rgb(201, 201, 201);
+    width: 60px;
+    height: 35px;
+    line-height: 32px;
+    background-color: #fafafa;
+    margin-left: 10px;
+}

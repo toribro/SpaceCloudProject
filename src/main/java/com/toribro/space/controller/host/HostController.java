@@ -1,4 +1,4 @@
-package com.toribro.space.host;
+package com.toribro.space.controller.host;
 
 import ch.qos.logback.core.model.Model;
 import lombok.extern.slf4j.Slf4j;

@@ -12,6 +12,10 @@ spring:
       hibernate:
         #  show_sql: true
         format_sql: true
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
 
 mybatis:
   type-aliases-package:

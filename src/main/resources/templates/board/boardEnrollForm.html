@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH ROOMMOAH</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/91f9609a45.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/resources/teo/favicon-16x16.png}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/board/boardEnrollForm.css}">
+    <script th:src="@{/js/board/boardEnrollForm.js}"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menubar.css}">
+    <script th:src="@{/js/menubar.js}"></script>
+</head>
+<body>
+<!-- Include menubar -->
+<div th:replace="~{/menubar :: menubar}"></div>
+
+<div id="board-wrapper">
+    <h3 style="color: #927f69">일반게시판 작성</h3>
+
+    <form th:action="@{/board}" id="enroll-form" th:method="post" enctype="multipart/form-data">
+        <div id="main">
+            <div id="name-wrapper">
+                <div id="name">이름</div>
+                <!-- <input id="name-input" type="text"> -->
+            </div>
+
+            <div id="title-wrapper">
+                <div id="title">제목 *</div>
+                <input id="title-input" type="text" name="title" placeholder="제목을 입력해주세요" required>
+            </div>
+
+            <div id="content-wrapper">
+                <div id="content">내용 *</div>
+                <textarea id="content-input" name="content" rows="20" placeholder="내용을 입력해주세요" required></textarea>
+            </div>
+
+            <div id="img-wrapper">
+                <div id="img">이미지</div>
+                <div id="img-input">
+                    <img id="content-img" name="content-img" onclick="chooseFile();">
+                </div>
+            </div>
+
+            <div style="display:none">
+                <input type="file" name="file" id="file" onchange="loadImg(this)">
+            </div>
+
+            <div id="regist-area">
+                <div id="cancle">
+                    <a th:href="@{/board}" id="a1">취소</a>
+                </div>
+                <div id="regist">
+                    <button type="submit" id="btn">등록</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

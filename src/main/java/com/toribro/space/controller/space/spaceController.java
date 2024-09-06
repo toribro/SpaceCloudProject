@@ -1,4 +1,4 @@
-package com.toribro.space.space;
+package com.toribro.space.controller.space;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

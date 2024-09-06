@@ -11,17 +11,17 @@ $(function(){
 
 // 호스트 페이지로 이동
     $(".side-tohost").click(function(){
-        location.href = "[[@{/main.ho}]]";
+        location.href = "/host";
     });
 
 // 공지사항 페이지로 이동
     $(".notice").click(function(){
-        location.href = "[[@{/list.no(cpage=1)}]]";
+        location.href = "/notice";
     });
 
 // 일반 게시판 페이지로 이동
     $(".general").click(function(){
-        location.href = "/board/list";
+        location.href = "/board";
     });
 
 // 찜한 공간으로 이동

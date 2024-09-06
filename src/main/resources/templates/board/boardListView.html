@@ -31,7 +31,7 @@
 
 <div id="board-wrapper">
   <h3>
-            <span style="color: #927f69; cursor:pointer" th:onclick="|location.href='@{/list.bo?cpage=1}'|">
+            <span style="color: #927f69; cursor:pointer" th:onclick="|location.href='@{/board?cpage=1}'|">
                 일반게시판
             </span>
   </h3>
@@ -75,7 +75,7 @@
     </div>
   </div>
 
-  <form action="search.bo" method="get">
+  <form action="" method="get">
     <div id="search-area" align="center">
       <input type="hidden" name="cpage" value="1">
       <select name="condition" id="selectbar">
@@ -90,6 +90,6 @@
 </div>
 
 <!-- External JavaScript file -->
-<script th:src="@{/js/boardList.js}"></script>
+
 </body>
 </html>

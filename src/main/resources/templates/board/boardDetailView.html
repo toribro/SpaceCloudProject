@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KH ROOMMOAH</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/91f9609a45.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/resources/teo/favicon-16x16.png}">
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/board/boardDetailView.css}">
+  <script th:src="@{/js/board/boardDetailView.js}"></script>
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/menubar.css}">
+  <script th:src="@{/js/menubar.js}"></script>
+</head>
+<body>
+<!-- Include menubar using Thymeleaf -->
+<th:block th:replace="~{/menubar :: menubar}"></th:block>
+
+<div id="board-wrapper">
+  <h2><span style="color: #927f69; cursor:pointer" th:onclick="|location.href='@{/list.bo?cpage=1}'|">일반게시판</span></h2>
+  <div id="main">
+    <div id="board-view">
+      <div id="title-area">
+        <div id="title" th:text="${board?.boardTitle}"></div>
+        <div id="writer-info">
+          <span th:text="${board?.boardWriter}"></span>
+          <span th:text="${board?.createDate}"></span>
+        </div>
+      </div>
+      <div id="content-area">
+        <div id="ud-de" align="right">
+          <th:block th:if="${loginUser != null and (loginUser.userNo == board.writerNo or loginUser.admin == 'Y')}">
+            <a th:href="@{/updateForm.bo(num=${board.boardNo})}" id="a1">수정하기</a>
+            <a href="#" id="cancelButton">삭제하기</a>
+          </th:block>
+        </div>
+        <div id="txt">
+          <th:block th:if="${boardAttachment != null}">
+            <div id="img-area">
+              <img th:src="@{${boardAttachment.filePath}${boardAttachment.changeName}}" id="img-content">
+            </div>
+          </th:block>
+
+          <div>
+            <p th:text="${board?.boardContent}"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="reply-count-area">
+      댓글 <span id="reply-count"></span>
+    </div>
+
+    <div id="reply-area">
+      <div id="reply-list"></div>
+
+      <div id="reply-input">
+        <textarea th:if="${loginUser != null}" id="reply-content" placeholder="내용을 입력하세요"></textarea>
+        <textarea th:if="${loginUser == null}" id="reply-content" placeholder="댓글을 입력하시려면 로그인 해주세요" readonly></textarea>
+      </div>
+    </div>
+
+    <div id="btn-area">
+      <button id="btn1" th:onclick="|location.href='@{/board}'|">목록보기</button>
+
+      <th:block th:if="${minBoardNo != board?.boardNo}">
+        <button id="btn2" th:onclick="|location.href='@{/detail.bo(num=${board.boardNo - 1}, pre=pre)}'|">이전 글</button>
+      </th:block>
+
+      <th:block th:if="${maxBoardNo != board?.boardNo}">
+        <button id="btn3" th:onclick="|location.href='@{/detail.bo(num=${board.boardNo + 1}, next=next)}'|">다음 글</button>
+      </th:block>
+
+      <span>
+                    <button id="btn4" th:if="${loginUser != null}" onclick="insertReply(boardNo)">답글쓰기</button>
+                    <button id="btn4" th:if="${loginUser == null}" disabled>답글쓰기</button>
+                </span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

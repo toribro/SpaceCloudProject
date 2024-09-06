@@ -14,11 +14,11 @@ $(function(){
     });
 
     document.querySelector(".notice").addEventListener("click", function() {
-        location.href = "/list.no?cpage=1";
+        location.href = "/notice";
     });
 
     document.querySelector(".general").addEventListener("click", function() {
-        location.href = "/board/list";
+        location.href = "/board";
     });
 
     document.querySelector(".myspaces").addEventListener("click", function() {
