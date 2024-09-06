@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KH ROOMMOAH</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/91f9609a45.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/resources/teo/favicon-16x16.png}">
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/member/memberLoginForm.css}">
+  <script th:src="@{/js/member/memberLoginForm.js}"></script>
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/menubar.css}">
+  <script th:src="@{/js/menubar.js}"></script>
+
+</head>
+
+<body>
+<!-- Include menubar -->
+<div th:replace="~{/menubar :: menubar}"></div>
+
+
+<div id="wrapper">
+  <div class="login-top">
+    <h2>로그인</h2>
+  </div>
+
+  <div class="login-body">
+    <div class="login-logo">
+      <h1>KH ROOMMOAH</h1>
+    </div>
+
+    <!-- Form action for login -->
+    <form th:action="@{login}" method="post">
+      <div class="member-login">
+        <input type="text" id="userId" name="userId" placeholder="아이디" th:value="${cookie?.saveId?.value}"><br>
+        <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호">
+        <label for="remember" id="saveId"> 아이디 저장 </label>
+        <input type="checkbox" id="idSaveCheck" name="saveId" th:checked="${cookie?.saveId != null}"><br>
+      </div>
+      <input type="submit" class="userlogin" value="로 그 인" onclick="return loginuser();">
+    </form>
+
+    <div class="two-line">
+      <hr>
+      <h6>또는</h6>
+      <hr>
+    </div>
+
+    <div class="find-user-info">
+      <a th:href="@{/password}" class="find-pwd">비밀번호를 잊으셨나요?</a><br>
+      <h7>계정이 없으신가요?</h7>
+      <a th:href="@{/member}" class="join-user">회원가입</a>
+    </div>
+  </div>
+</div>

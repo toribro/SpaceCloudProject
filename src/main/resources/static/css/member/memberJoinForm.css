@@ -1,0 +1,126 @@
+#wrapper {
+    width: 1200px;
+    margin: auto;
+}
+
+.join-user {
+    margin: auto;
+    margin-top: 120px;
+    width: 600px;
+    height: auto;
+    border: 1px solid;
+    border-radius: 20px;
+    background: #F2F6FF;
+    padding: 30px;
+    margin-bottom: 100px;
+}
+
+.text-header {
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.text-header2 {
+    font-size: 20px;
+    color: #676262;
+    font-weight: bold;
+}
+
+.user-id td {
+    font-size: 13px;
+}
+
+.cantid {
+    color: red;
+    display: none;
+}
+
+.useableid {
+    color: #34B407;
+    display: none;
+}
+
+.cantPwd, .cantPwdCheck {
+    font-size: 13px;
+    color: red;
+    font-weight: 600;
+    display: none;
+}
+
+.usealbePwd {
+    font-size: 13px;
+    color: #34B407;
+    font-weight: 600;
+    display: none;
+}
+
+td > input {
+    width: 100%;
+    height: 45px;
+    background: #EEEEEE;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 15px;
+}
+
+.input-id > input {
+    width: 135%;
+}
+
+[type="radio"]:checked {
+    border: 0.4em solid rgb(109, 72, 212);
+}
+
+[type="radio"] {
+    appearance: none;
+    border: 2px solid gray;
+    border-radius: 50%;
+    width: 1.25em;
+    height: 1.25em;
+    margin-top: 20px;
+    margin-left: 55px;
+}
+
+.u-email, .select-email {
+    width: 47.75%;
+    height: 45px;
+    background: #EEEEEE;
+    border-radius: 5px;
+    border: 0;
+}
+
+.btn-area {
+    display: flex;
+    margin-top: 55px;
+    height: 60px;
+    justify-content: space-between;
+    padding: 1px 53px;
+}
+
+.join-btn, .cancle {
+    width: 200px;
+    font-size: 25px;
+    border-radius: 8px;
+}
+
+.join-btn {
+    background: #704DE4;
+    color: white;
+    border: 0;
+}
+
+.join-btn:hover {
+    background: #432c8d;
+}
+
+.cancle {
+    color: white;
+    background: #f84242;
+    line-height: 57px;
+    text-align: center;
+}
+
+.cancle:hover {
+    background-color: #a50000;
+    text-decoration: none;
+}

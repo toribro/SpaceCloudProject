@@ -38,10 +38,12 @@
         <div id="right-bar" align="end">
             <!-- 로그인 여부 확인 -->
             <div th:if="${loginUser == null}">
-                <a th:href="@{/enrollForm.me}">회원가입</a> | <a th:href="@{/loginForm.me}">로그인</a>
+                <a th:href="@{/member/join}">회원가입</a> | <a th:href="@{/member/login}">로그인</a>
             </div>
-            <div th:if="${loginUser != null}">
-                <a th:href="@{/myPage.me}" th:text="${loginUser.nickName}"></a> | <a th:href="@{/logout.me}">로그아웃</a>
+<!--            <div th:if="${loginUser != null}">-->
+            <div>
+<!--                <a th:href="@{/memger/page}" th:text="${loginUser?.nickName}">마이페이지</a> | <a th:href="@{/member/logout}">로그아웃</a>-->
+                <a th:href="@{/member}" >마이페이지</a> | <a th:href="@{/member/logout}">로그아웃</a>
             </div>
         </div>
     </div>
@@ -92,7 +94,7 @@
 
     <br><br><br><br>
     <div th:if="${loginUser != null}">
-        <a th:href="@{/logout.me}">로그아웃</a>
+        <a th:href="@{/logout}">로그아웃</a>
     </div>
     <br><br>
     <div class="side-tohost">

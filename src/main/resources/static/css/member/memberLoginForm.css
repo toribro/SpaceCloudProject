@@ -1,0 +1,131 @@
+#wrapper {
+    width: 1200px;
+    margin: auto;
+}
+
+.login-top {
+    background: #704DE4;
+    width: 400px;
+    height: 65px;
+    border-radius: 20px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.login-top h2 {
+    color: #FFFFFF;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.login-body {
+    border: 1px solid gray;
+    background: #F2F6FF;
+    height: 570px;
+    width: 540px;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 20px;
+}
+
+.login-body .login-logo h1 {
+    font-family: 'ZCOOL KuaiLe';
+    font-weight: bold;
+}
+
+.login-logo {
+    padding: 70px;
+    font-size: larger;
+    text-align: center;
+}
+
+.member-login {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.member-login input {
+    margin-bottom: 10px;
+}
+
+input {
+    height: 70px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    border-width: 0px;
+    margin-bottom: 5px;
+    background: #EEEEEE;
+}
+
+.userlogin {
+    width: 300px;
+    height: 50px;
+    padding: 2px;
+    background-color: #704DE4;
+    color: #FFFFFF;
+    font-size: 30px;
+    margin: 10px 120px;
+}
+
+.userlogin:hover {
+    background-color: #947fda;
+}
+
+.two-line {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+hr {
+    border: 1px solid;
+    width: 200px;
+}
+
+.two-line>h6 {
+    line-height: 30px;
+    font-weight: 900;
+}
+
+.find-user-info>.find-pwd {
+    padding-left: 180px;
+    margin: 5px;
+}
+
+.find-pwd:hover {
+    color: rgb(150, 159, 243);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+h7 {
+    color: #7B7676;
+    font-weight: 500;
+    margin-right: 6px;
+    padding-left: 163px;
+}
+
+.join-user {
+    color: #6076AF;
+}
+
+.join-user:hover {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#idSaveCheck {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    top: 2px;
+    left: 3px;
+}
+
+#saveId {
+    padding-left: 5px;
+}

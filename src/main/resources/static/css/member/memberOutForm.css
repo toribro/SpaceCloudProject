@@ -1,0 +1,121 @@
+#wrapper {
+    width: 1200px;
+    margin: auto;
+}
+
+.secss-member {
+    height: 400px;
+    width: 550px;
+    margin: 200px auto;
+    text-align: center;
+    padding: 50px;
+}
+
+.head-text1 {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.head-text2 {
+    padding-top: 5px;
+    color: #929292;
+    font-size: 13px;
+}
+
+.checkbox-area {
+    display: flex;
+    padding-left: 25px;
+}
+
+.agree-text {
+    color: #777777;
+}
+
+.checkbox-wrapper-19 {
+    box-sizing: border-box;
+    --background-color: #ffff;
+    --checkbox-height: 25px;
+    width: 40px;
+}
+
+.checkbox-wrapper-19 input[type=checkbox] {
+    display: none;
+}
+
+.checkbox-wrapper-19 .check-box {
+    height: var(--checkbox-height);
+    width: var(--checkbox-height);
+    background-color: transparent;
+    border: calc(var(--checkbox-height) * .1) solid #000;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    cursor: pointer;
+}
+
+.checkbox-wrapper-19 .check-box::before,
+.checkbox-wrapper-19 .check-box::after {
+    position: absolute;
+    height: 0;
+    width: calc(var(--checkbox-height) * .2);
+    background-color: #704DE4;
+    display: inline-block;
+    content: " ";
+    border-radius: 5px;
+}
+
+.checkbox-wrapper-19 .check-box::before {
+    top: calc(var(--checkbox-height) * .72);
+    left: calc(var(--checkbox-height) * .41);
+    transform: rotate(-135deg);
+}
+
+.checkbox-wrapper-19 .check-box::after {
+    top: calc(var(--checkbox-height) * .37);
+    left: calc(var(--checkbox-height) * .05);
+    transform: rotate(-45deg);
+}
+
+.checkbox-wrapper-19 input[type=checkbox]:checked+.check-box::after {
+    height: calc(var(--checkbox-height) / 2);
+}
+
+.checkbox-wrapper-19 input[type=checkbox]:checked+.check-box::before {
+    height: calc(var(--checkbox-height) * 1.2);
+}
+
+.secss-btn {
+    width: 100%;
+    height: 100px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#cancle {
+    width: 150px;
+    height: 40px;
+    border: 1px solid;
+    text-decoration: none;
+    line-height: 35px;
+    border-radius: 5px;
+    background: #525252;
+    color: white;
+}
+
+#cancle:hover {
+    opacity: 0.85;
+}
+
+#secess {
+    height: 40px;
+    width: 150px;
+    border: 0;
+    color: white;
+    background: #704DE4;
+    border-radius: 5px;
+}
+
+#secess:hover {
+    opacity: 0.85;
+}

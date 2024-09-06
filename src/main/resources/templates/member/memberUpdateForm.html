@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH ROOMMOAH</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/91f9609a45.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/resources/teo/favicon-16x16.png}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/member/memberUpdateForm.css}">
+    <script th:src="@{/js/member/memberUpdateForm.js}"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menubar.css}">
+    <script th:src="@{/js/menubar.js}"></script>
+
+</head>
+
+<body>
+<div th:replace="~{/menubar :: menubar}"></div>
+
+<div id="wrapper">
+    <div class="join-user">
+        <form th:action="@{/member/1}" id="login-form" th:method="patch">
+            <input id="userId" type="hidden" th:value="${loginUser?.userId}" name="userId">
+
+            <table width="100%" class="tb">
+                <tr>
+                    <input type="button" id="hbtn1" class="head-btn" value="비밀번호 변경" onclick="pwdUpdate()" style="margin-right: 10px;">
+                    <input type="button" id="hbtn2" class="head-btn" value="변경 취소" onclick="canclePwdUpdate()">
+                </tr>
+
+                <!-- Current Password Field -->
+                <tr class="user-id">
+                    <th class="pwd-color">현재 비밀번호</th>
+                    <td colspan="2" id="oldPwd-area" align="right"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="input-id">
+                        <input type="password" name="oldPwd" id="oldPwd" minlength="6" maxlength="15" placeholder="" onblur="onbcrt()" required readonly>
+                    </td>
+                </tr>
+
+                <!-- New Password Field -->
+                <tr>
+                    <th class="pwd-color">변경할 비밀번호</th>
+                    <td class="cantPwd" colspan="2" align="right"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="input-pwd">
+                        <input type="password" name="userPwd" id="userPwd" maxlength="20" placeholder="" onblur="onbcrt();onb();" required readonly>
+                    </td>
+                </tr>
+
+                <!-- Confirm New Password Field -->
+                <tr class="user-pwd-check">
+                    <th class="pwd-color">비밀번호 확인</th>
+                    <td class="cantPwdCheck" align="right">*비밀번호가 일치하지 않습니다</td>
+                    <td class="usealbePwd" align="right"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="input-pwd-check">
+                        <input type="password" id="userPwdCheck" placeholder="" onblur="onb()" readonly>
+                    </td>
+                </tr>
+
+                <!-- Nickname Field -->
+                <tr class="user-nickname">
+                    <th colspan="3">닉네임</th>
+                </tr>
+                <tr>
+                    <td colspan="3" class="input-nickname">
+                        <input type="text" id="userNickName" name="nickName" placeholder=" 특수문자 제외 최대 8글자" th:value="${loginUser?.nickName}">
+                    </td>
+                </tr>
+
+                <!-- Phone Field -->
+                <tr>
+                    <th colspan="3">전화번호</th>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input type="text" id="phone" name="phone" placeholder=" 휴대폰 번호 입력" th:value="${loginUser?.phone}">
+                    </td>
+                </tr>
+
+                <!-- Birthdate Field -->
+                <tr>
+                    <th colspan="3">생년월일</th>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input type="text" id="birth" name="birth" placeholder=" 주민번호 앞자리(8글자)" th:value="${loginUser?.birth}" readonly>
+                    </td>
+                </tr>
+            </table>
+            <!-- Email Field -->
+            <h4 class="email-header">이메일</h4>
+<!--            <input type="text" class="u-email" placeholder="" id="email" name="email" th:value="${#strings.substringBefore(loginUser?.email, '@')}">-->
+            <b>@</b>
+            <select class="select-email" name="select-email">
+                <option th:value="${#strings.substringAfter(loginUser?.email, '@')}" th:text="${#strings.substringAfter(loginUser?.email, '@')}"></option>
+                <option value="naver.com">naver.com</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="hanmail.net">hanmail.net</option>
+                <option value="hotmail.com">hotmail.com</option>
+                <option value="korea.com">korea.com</option>
+                <option value="nate.com">nate.com</option>
+                <option value="yahoo.com">yahoo.com</option>
+            </select>
+
+            <!-- Buttons for Save and Cancel -->
+            <div class="btn-area">
+                <button type="submit" class="join-btn" onclick="return editUser()">정보 수정</button>
+                <a href="#" onclick="history.back();" class="cancel">돌아가기</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+
+</html>
