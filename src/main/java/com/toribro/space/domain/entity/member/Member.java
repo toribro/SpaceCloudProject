@@ -1,8 +1,8 @@
-package com.toribro.space.entity.member;
+package com.toribro.space.domain.entity.member;
 
-import com.toribro.space.entity.member.status.HostGuest;
-import com.toribro.space.entity.member.status.OuterStatus;
-import com.toribro.space.entity.space.Space;
+import com.toribro.space.domain.entity.member.status.HostGuest;
+import com.toribro.space.domain.entity.member.status.OuterStatus;
+import com.toribro.space.domain.entity.space.Space;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,14 +14,16 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name="MEMBER")
-//@ToString
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
 public class Member {
 
 
     @Id
     @Column(name="user_no")
-    private int userNo; //번호
+    private Long userNo; //번호
 
     private String userId; //아이디
     private String userPwd; //비번

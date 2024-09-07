@@ -1,4 +1,4 @@
-package com.toribro.space.entity.space;
+package com.toribro.space.domain.entity.space;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

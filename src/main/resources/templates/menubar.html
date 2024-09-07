@@ -23,8 +23,8 @@
 </head>
 <body>
 <!-- 알림 메시지 처리 -->
-<script th:if="${alertMsg != null}">
-    alert([[${alertMsg}]]);
+<script th:if="${session.alertMsg != null}">
+    alert('${session.alertMsg}');
 </script>
 
 <div th:fragment="menubar" >

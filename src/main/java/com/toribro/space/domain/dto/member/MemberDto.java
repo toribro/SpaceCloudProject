@@ -1,4 +1,4 @@
-package com.toribro.space.dto.member;
+package com.toribro.space.domain.dto.member;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -6,9 +6,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.antlr.v4.runtime.misc.NotNull;
-
-import java.time.LocalDateTime;
 
 public class MemberDto {
 
@@ -52,4 +49,33 @@ public class MemberDto {
         @Pattern(message = "전화번호 형식이 잘못되었습니다. (예: 01012345678)", regexp = "^01[016789]\\d{7,8}$")
         private String phone;
     }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class findDto{
+
+
+        private String userName;
+        private String userId;
+
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class updateDto{
+
+
+        private String userName;
+        private String userId;
+        private String userPwd;
+        private String userPwdCheck;
+        private String nickName;
+        private String birth;
+        private String gender;
+        private String email;
+        private String phone;
+    }
+
 }

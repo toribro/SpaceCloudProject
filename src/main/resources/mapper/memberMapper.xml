@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+ id: method이름
+ #{}:파라미터
+ resultType:반환값
+ CREATE SEQUENCE member_seq START WITH 1 INCREMENT BY 1;
+ Enum타입은 제약조건이 자동으로 걸린다.
+
+-->
+
+<mapper namespace="com.toribro.space.repository.member.MemberMapper"><!-- 자바 인터페이스랑 매핑-->
+
+
+    <insert id="save" keyProperty="userNo" >
+
+        <selectKey keyProperty="userNo" resultType="Long" order="BEFORE">
+            SELECT member_seq.NEXTVAL FROM dual
+        </selectKey>
+
+        insert into Member (user_no,join_date,modify_date,birth,
+                          email,gender,nick_name,out_status,phone,user_admin,user_host,user_id,user_name,user_pwd)
+        values (#{userNo},null,null,#{birth},#{email},#{gender},#{nickName},'N',#{phone},'N','HOST',#{userId},#{userName},#{userPwd})
+    </insert>
+
+    <update id="update">
+
+    </update>
+
+    <select id="findById"  resultType="Member"><!-- domain.item-->
+
+
+
+    </select>
+
+    <!--
+      if 가 하나라도 성공하면 and를 where로 바꿔준다.
+     -->
+
+<!--    <select id="findAll" resultType="Item">-->
+<!--        select id,item_name,price,quantity-->
+<!--        from item-->
+<!--        <where>-->
+<!--            <if test="itemName !=null and itemName !=''">-->
+<!--                and item_name like concat('%',#{itemName},'%')-->
+<!--            </if>-->
+
+<!--            <if test="maxPrice !=null">-->
+<!--                and price &lt;= #{maxPrice}-->
+<!--           </if>-->
+
+<!--        </where>-->
+
+<!--    </select>-->
+
+</mapper>

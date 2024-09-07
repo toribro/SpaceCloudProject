@@ -1,7 +1,9 @@
 package com.toribro.space.controller.member;
 
-import com.toribro.space.dto.member.MemberDto;
-import com.toribro.space.entity.member.Member;
+import com.toribro.space.domain.dto.member.MemberDto;
+import com.toribro.space.service.member.MemberService;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,10 @@ import java.util.Map;
 @Controller
 @RequestMapping("/member")
 @Slf4j
+@RequiredArgsConstructor
 public class MemberController {
+
+    private final MemberService memberService;
 
     //회원가입페이지이동
     @GetMapping("/join")
@@ -43,7 +48,8 @@ public class MemberController {
 
     //회원가입(회원 생성C)
     @PostMapping
-    public String join(@Validated @ModelAttribute("member") MemberDto.CreateDto member, BindingResult bindingResult,Model model){
+    public String join(@Validated @ModelAttribute("member") MemberDto.CreateDto member,
+                       BindingResult bindingResult, Model model , HttpSession session){
         log.info("회원가입");
         log.info("{}",member);
         Map<String, String> errors = new HashMap<>();
@@ -59,6 +65,9 @@ public class MemberController {
             log.info("errors={}",bindingResult);
             return "member/memberJoinForm";
         }
+
+        memberService.save(member);
+        session.setAttribute("alertMsg","회원가입 되었습니다.");
 
         return "redirect:/";
     }

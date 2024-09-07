@@ -1,10 +1,9 @@
-package com.toribro.space.entity.space;
+package com.toribro.space.domain.entity.space;
 
-import com.toribro.space.entity.member.Member;
+import com.toribro.space.domain.entity.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.annotation.processing.Generated;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
