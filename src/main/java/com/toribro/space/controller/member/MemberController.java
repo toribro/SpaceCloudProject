@@ -1,8 +1,16 @@
 package com.toribro.space.controller.member;
 
+import com.toribro.space.dto.member.MemberDto;
+import com.toribro.space.entity.member.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/member")
@@ -11,14 +19,15 @@ public class MemberController {
 
     //회원가입페이지이동
     @GetMapping("/join")
-    public String joinForm(){
+    public String joinForm(Model model) {
+        model.addAttribute("member",new MemberDto.CreateDto());
         return "member/memberJoinForm";
     }
 
 
     //탈퇴페이지이동
     @GetMapping("/out")
-    public String outForm(){
+    public String outForm() {
         return "member/memberOutForm";
     }
 
@@ -34,8 +43,23 @@ public class MemberController {
 
     //회원가입(회원 생성C)
     @PostMapping
-    public String join(){
+    public String join(@Validated @ModelAttribute("member") MemberDto.CreateDto member, BindingResult bindingResult,Model model){
         log.info("회원가입");
+        log.info("{}",member);
+        Map<String, String> errors = new HashMap<>();
+
+        if(!member.getUserPwd().equals(member.getUserPwdCheck())){
+//            bindingResult.reject("passworderror",new Object[]{"checkError"},null);
+             errors.put("userPwdCheck","비밀번호가 일치하지 않습니다.");
+             model.addAttribute("pwdError",errors);
+        }
+
+
+        if(bindingResult.hasErrors()){
+            log.info("errors={}",bindingResult);
+            return "member/memberJoinForm";
+        }
+
         return "redirect:/";
     }
 

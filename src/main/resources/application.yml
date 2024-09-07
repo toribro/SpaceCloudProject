@@ -1,24 +1,28 @@
 spring:
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521:XE
+    url:  jdbc:oracle:thin:@localhost:1521:xe
     username: toribro
     password: 1234
-    driver-class-name: oracle.jdbc.OracleDriver
+    driver-class-name: oracle.jdbc.driver.OracleDriver
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto:
     properties:
       hibernate:
-        #  show_sql: true
         format_sql: true
+        globally_quoted_identifiers:
+        generate_statistics: true
+        id:
+          new_generator_mappings: true
+
   mvc:
     hidden-method:
       filter:
         enabled: true
 
 mybatis:
-  type-aliases-package:
+  type-aliases-package: com.toribro.space.entity
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/**/*.xml

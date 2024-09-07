@@ -43,7 +43,8 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <input type="text" id="userName" name="userName" placeholder="이름" style="width: 70%;" required>
+                        <input type="text" id="userName" name="userName" th:field="${member.userName}"  th:errorclass="field-error" placeholder="이름" style="width: 70%;" required>
+                        <div class="field-error" th:errors="${member.userName}"></div>
                     </td>
                 </tr>
 
@@ -55,7 +56,8 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="input-id">
-                        <input type="text" name="userId" id="userId" minlength="6" maxlength="20" placeholder="아이디입력 6~20자" required>
+                        <input type="text" name="userId" id="userId" minlength="6" maxlength="20" th:field="${member.userId}" th:errorclass="field-error"  placeholder="아이디입력 6~20자" required>
+                        <div class="field-error" th:errors="${member.userName}"></div>
                     </td>
                     <td>
 <!--                        <button type="button" class="idCheck" onclick="idCheck()">중복 확인</button>-->
@@ -69,7 +71,8 @@
                 </tr>
                 <tr>
                     <td colspan="3" class="input-pwd">
-                        <input type="password" name="userPwd" id="userPwd" maxlength="20" placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)" required onblur="onb()">
+                        <input type="password" name="userPwd" id="userPwd" th:field="${member.userPwd}" th:errorclass="field-error"  maxlength="20" placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)" required onblur="onb()">
+                        <div class="field-error"  th:errors="${member.userPwd}" ></div>
                     </td>
                 </tr>
 
@@ -81,7 +84,8 @@
                 </tr>
                 <tr>
                     <td colspan="3" class="input-pwd-check">
-                        <input type="password" id="userPwdCheck" placeholder="비밀번호 확인 입력" onblur="onb()">
+                        <input type="password" id="userPwdCheck" th:field="${member.userPwdCheck}" th:errorclass="field-error"  placeholder="비밀번호 확인 입력" onblur="onb()">
+                        <div class="field-error"   th:if="${pwdError?.containsKey('userPwdCheck')}" th:text="${pwdError['userPwdCheck']} "></div>
                     </td>
                 </tr>
 
@@ -91,7 +95,8 @@
                 </tr>
                 <tr>
                     <td colspan="3" class="input-nickname">
-                        <input type="text" id="nickName" name="nickName" placeholder="특수문자 제외 ('~,!,@,#,$...) 최대 8글자" required>
+                        <input type="text" id="nickName" name="nickName"  th:field="${member.nickName}"  th:errorclass="field-error"  placeholder="특수문자 제외 ('~,!,@,#,$...) 최대 8글자" required>
+                        <div class="field-error" th:errors="${member.nickName}"></div>
                     </td>
                 </tr>
 
@@ -99,8 +104,9 @@
                 <tr class="user-gender">
                     <th colspan="2"><span class="star">* </span>성별</th>
                     <td align="center" class="ck-gender">
-                        <label><input type="radio" name="gender" value="M"><b class="genra">남</b></label>
-                        <label><input type="radio" name="gender" value="F"><b class="genra">여</b></label>
+                        <label><input type="radio" name="gender" th:field="${member.gender}" th:errorclass="field-error" value="M"><b class="genra">남</b></label>
+                        <label><input type="radio" name="gender" th:field="${member.gender}"  th:errorclass="field-error" value="F"><b class="genra">여</b></label>
+                        <div class="field-error" th:errors="${member.gender}"></div>
                     </td>
                 </tr>
 
@@ -110,7 +116,8 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <input type="text" id="phone" name="phone" placeholder="휴대폰 번호 입력 ('-' 제외 11자리 입력)" required>
+                        <input type="text" id="phone" name="phone" th:field="${member.phone}" th:errorclass="field-error" placeholder="휴대폰 번호 입력 ('-' 제외 11자리 입력)" required>
+                        <div class="field-error" th:errors="${member.phone}"></div>
                     </td>
                 </tr>
 
@@ -120,25 +127,28 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <input type="text" id="birth" name="birth" placeholder="생년월일 입력 (8자리)" required>
+                        <input type="text" id="birth" name="birth"  th:field="${member.birth}" th:errorclass="field-error" placeholder="생년월일 입력 (8자리)" required>
+                        <div class="field-error" th:errors="${member.birth}"></div>
                     </td>
                 </tr>
             </table>
 
             <!-- 이메일 -->
             <h4 class="email-header"><span class="star">* </span>이메일</h4>
-            <input type="text" id="email" name="email" class="u-email" placeholder="" required>
-            <b>@</b>
-            <select class="select-email" name="select-email" required>
-                <option value="">-선택-</option>
-                <option value="naver.com">naver.com</option>
-                <option value="gmail.com">gmail.com</option>
-                <option value="hanmail.net">hanmail.net</option>
-                <option value="hotmail.com">hotmail.com</option>
-                <option value="korea.com">korea.com</option>
-                <option value="nate.com">nate.com</option>
-                <option value="yahoo.com">yahoo.com</option>
-            </select>
+            <input type="text" id="email" name="email" class="u-email"  th:field="${member.email}" th:errorclass="field-error"  placeholder="" required>
+            <div class="field-error" th:errors="${member.email}"></div>
+
+<!--            <b>@</b>-->
+<!--            <select class="select-email" name="select-email" required>-->
+<!--                <option value="">-선택-</option>-->
+<!--                <option value="naver.com">naver.com</option>-->
+<!--                <option value="gmail.com">gmail.com</option>-->
+<!--                <option value="hanmail.net">hanmail.net</option>-->
+<!--                <option value="hotmail.com">hotmail.com</option>-->
+<!--                <option value="korea.com">korea.com</option>-->
+<!--                <option value="nate.com">nate.com</option>-->
+<!--                <option value="yahoo.com">yahoo.com</option>-->
+<!--            </select>-->
 
             <div class="btn-area">
 <!--                //onclick="return joinUser();-->
