@@ -22,12 +22,14 @@
 
 </head>
 <body>
-<!-- 알림 메시지 처리 -->
-<script th:if="${session.alertMsg != null}">
-    alert('${session.alertMsg}');
-</script>
+
 
 <div th:fragment="menubar" >
+
+    <!-- 알림 메시지 처리 -->
+    <script  th:inline="javascript" th:if="${session.alertMsg!= null} ">
+        alert([[${session.alertMsg}]]);
+    </script>
 
 <div  class="menubar-wrapper">
     <div class="login-area">
@@ -37,12 +39,11 @@
         <h2 class="menubar-logo" th:onclick="location.href='@{/}'">KH ROOMMOAH</h2>
         <div id="right-bar" align="end">
             <!-- 로그인 여부 확인 -->
-            <div th:if="${loginUser == null}">
+            <div th:if="${session.loginUser == null}">
                 <a th:href="@{/member/join}">회원가입</a> | <a th:href="@{/member/login}">로그인</a>
             </div>
-<!--            <div th:if="${loginUser != null}">-->
-            <div>
-<!--                <a th:href="@{/memger/page}" th:text="${loginUser?.nickName}">마이페이지</a> | <a th:href="@{/member/logout}">로그아웃</a>-->
+            <div th:if="${session.loginUser!= null}">
+                <span th:text="${session.loginUser.nickName}+'님 환영합니다'">회원정보</span><br>
                 <a th:href="@{/member}" >마이페이지</a> | <a th:href="@{/member/logout}">로그아웃</a>
             </div>
         </div>
@@ -56,22 +57,22 @@
             <i class="fa-solid fa-x fa-xl" onclick="closeNav()"></i>
         </div>
         <!-- 로그인 여부 확인 -->
-        <div th:if="${loginUser != null}">
+        <div th:if="${session.loginUser != null}">
             <div class="side-profile-picture">
                 <img class="profile-img" th:src="@{/resources/teo/noLoginProfile.JPG}" alt="defaultProfileImg">
             </div>
             <div class="side-profile-nickname">
+                <b th:text="${session.loginUser.nickName}"></b>
+                <p><a th:href="@{/member}">프로필 관리 ></a></p>
                 <br>
-                <b th:text="${loginUser.nickName}"></b>
-                <p><a th:href="@{/myPage.me}">프로필 관리 ></a></p>
             </div>
         </div>
-        <div th:if="${loginUser == null}">
+        <div th:if="${session.loginUser == null}">
             <div class="side-profile-picture">
                 <img class="profile-img" th:src="@{/resources/teo/noLoginProfile.JPG}" alt="defaultProfileImg">
             </div>
             <div class="side-profile-nickname">
-                <a th:href="@{/loginForm.me}">로그인 해주세요!</a>
+                <a th:href="@{/login}">로그인 해주세요!</a>
                 <br>
             </div>
         </div>
@@ -93,7 +94,7 @@
     </div>
 
     <br><br><br><br>
-    <div th:if="${loginUser != null}">
+    <div th:if="${session.loginUser != null}">
         <a th:href="@{/logout}">로그아웃</a>
     </div>
     <br><br>
@@ -101,7 +102,19 @@
         <p> 호스트센터로 이동 > </p>
     </div>
 </div>
+
+    <script th:inline="javascript" th:if="${session.alertMsg!= null}" >
+        $.ajax({
+            method:'GET',
+            url:"/session",
+            success:function(res){
+                console.log(res)
+            },
+            error:function(error){}
+
+        })
+
+    </script>
 </div>
-<!-- External JavaScript file -->
 </body>
 </html>

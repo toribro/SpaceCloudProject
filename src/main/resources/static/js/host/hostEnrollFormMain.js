@@ -17,6 +17,26 @@ $(function() {
         $(".textCount4").text(content.length);
     });
 
+
+    $('#spaceTag').keypress(function(event) {
+        if (event.which === 13) {
+            $('.tag-btn').click();
+            $('#spaceTag').focus();
+        }
+    });
+
+    $('#spaceInformation-input').keypress(function(event) {
+        if (event.which === 13) {
+            $('.spaceInfo-btn').click();
+        }
+    });
+
+    $('#spaceCaution-input').keypress(function(event) {
+        if (event.which === 13) {
+            $('.caution-btn').click();
+        }
+    });
+
     // 공간 유형 선택 복원
     const spaceKind = "${spaceKind}";
     const inputArr = document.querySelectorAll("input[name=spaceKind]");
@@ -25,7 +45,9 @@ $(function() {
             input.checked = true;
         }
     }
+
 });
+
 
 // 주소 검색 (Daum API 사용)
 function searchAddr() {
@@ -181,24 +203,6 @@ function chooseFile(num) {
     imgInput.click();
 }
 
-$('#spaceTag').keypress(function(event) {
-    if (event.which === 13) {
-        $('.tag-btn').click();
-        $('#spaceTag').focus();
-    }
-});
-
-$('#spaceInformation-input').keypress(function(event) {
-    if (event.which === 13) {
-        $('.spaceInfo-btn').click();
-    }
-});
-
-$('#spaceCaution-input').keypress(function(event) {
-    if (event.which === 13) {
-        $('.caution-btn').click();
-    }
-});
 
 function clickSubmit() {
     let myform = document.querySelector("form");

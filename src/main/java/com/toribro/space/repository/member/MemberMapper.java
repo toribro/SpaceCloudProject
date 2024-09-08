@@ -7,7 +7,8 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MemberMapper {
     void save(Member member);
-    Member findById(@Param("id")Long id, @Param("password")Long passWord);
+    Member findById(@Param("id")Long userNo);
     void update(Member member);
     void delete(Long userNo);
+    Member findMember(@Param("id")String id, @Param("password")String passWord);
 }

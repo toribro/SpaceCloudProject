@@ -7,14 +7,14 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto:
     properties:
       hibernate:
         format_sql: true
         globally_quoted_identifiers:
-        generate_statistics: true
+        generate_statistics:
         id:
-          new_generator_mappings: true
+          new_generator_mappings:
 
   mvc:
     hidden-method:

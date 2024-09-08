@@ -12,6 +12,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/91f9609a45.js" crossorigin="anonymous"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
@@ -20,11 +21,12 @@
     <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
 
 
+
     <!--  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/resources/teo/favicon-16x16.png}">-->
 
     <link rel="stylesheet"  type="text/css" th:href="@{/css/host/hostEnrollFormMain.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/menubarHost.css}">
-    <script th:src="@{/js/host/hostEnrollFromMain.js}"></script>
+    <script th:src="@{/js/host/hostEnrollFormMain.js}"></script>
     <script th:src="@{/js/menubarHost.js}"></script>
 </head>
 <body>
@@ -33,8 +35,8 @@
 
 <div id="wrapper">
     <br>
-    <form th:action="@{/spaceEnroll.sp}" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="userNo" th:value="${loginUser?.userNo}">
+    <form th:action="@{/host/enroll}" method="POST" enctype="multipart/form-data">
+
 
         <div class="login-top">
             <h2>시설물 등록</h2>
@@ -56,31 +58,38 @@
                 <td colspan="2" align="right"><span class="textCount1">0</span>/18자</td>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-name" class="input-text input-host1" name="spaceName" type="text" maxlength="18" placeholder="고유 업체명을 입력해주세요." required></td>
+                <td colspan="3"><input id="input-name" class="input-text input-host1"  th:field="${space.spaceName}" name="spaceName" type="text" maxlength="18" placeholder="고유 업체명을 입력해주세요." required></td>
             </tr>
 
-            <!-- 공간유형 -->
             <tr>
                 <th>공간유형<span class="red-color">*</span></th>
                 <td colspan="3">
-                    <div class="space-btns">
-                        <div><input type="checkbox" id="party" name="spaceKind" value="파티룸"><label for="party">&nbsp파티룸</label></div>
-                        <div><input type="checkbox" id="cafe" name="spaceKind" value="카페"><label for="cafe">&nbsp카페</label></div>
-                        <div><input type="checkbox" id="lecture" name="spaceKind" value="강의실"><label for="lecture">&nbsp강의실</label></div>
-                        <div><input type="checkbox" id="meeting" name="spaceKind" value="회의실"><label for="meeting">&nbsp회의실</label></div>
-                        <div><input type="checkbox" id="seminar" name="spaceKind" value="세미나실"><label for="seminar">&nbsp세미나실</label></div>
-                        <div><input type="checkbox" id="study" name="spaceKind" value="스터디룸"><label for="study">&nbsp스터디룸</label></div>
+<!--                    <div class="space-btns">-->
+<!--                        <div><input type="checkbox" id="party" name="spaceKind" value="파티룸"><label for="party">&nbsp파티룸</label></div>-->
+<!--                        <div><input type="checkbox" id="cafe" name="spaceKind" value="카페"><label for="cafe">&nbsp카페</label></div>-->
+<!--                        <div><input type="checkbox" id="lecture" name="spaceKind" value="강의실"><label for="lecture">&nbsp강의실</label></div>-->
+<!--                        <div><input type="checkbox" id="meeting" name="spaceKind" value="회의실"><label for="meeting">&nbsp회의실</label></div>-->
+<!--                        <div><input type="checkbox" id="seminar" name="spaceKind" value="세미나실"><label for="seminar">&nbsp세미나실</label></div>-->
+<!--                        <div><input type="checkbox" id="study" name="spaceKind" value="스터디룸"><label for="study">&nbsp스터디룸</label></div>-->
+<!--                    </div>-->
+
+                    <div th:each="spaceKind : ${space.spaceKinds}">
+                        <div>
+                            <input type="checkbox" th:id="${spaceKind.id}"  th:field="${space.spaceKind}" name="spaceKind" th:value="${spaceKind.value}">
+                            <label th:for="${spaceKind.id}">&nbsp;[[${spaceKind.value}]]</label>
+                        </div>
                     </div>
+
                 </td>
             </tr>
 
-            <!-- 공간 한줄 소개 -->
+
             <tr>
                 <th>공간 한 줄 소개<span class="red-color">*</span></th>
                 <td colspan="2" align="right"><span class="textCount2">0</span>/27자</td>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-intro1" class="input-text input-host2" name="spaceOneIntroduce" type="text" maxlength="27" placeholder="공간의 특장점을 한 문자응로 작성해주세요." required></td>
+                <td colspan="3"><input id="input-intro1" class="input-text input-host2" th:field="${space.spaceOneIntroduce}"  name="spaceOneIntroduce" type="text" maxlength="27" placeholder="공간의 특장점을 한 문자응로 작성해주세요." required></td>
             </tr>
 
             <!-- 공간 소개 -->
@@ -89,7 +98,7 @@
                 <td colspan="2" align="right"><span class="textCount3">0</span>/500자</td>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-intro2" class="input-text input-host3" name="spaceIntroduce" type="text" maxlength="500" placeholder="게스트들에게 필요한 공간 정보를 상세하게 소개해주세요." required></td>
+                <td colspan="3"><input id="input-intro2" class="input-text input-host3" th:field="${space.spaceIntroduce}" name="spaceIntroduce" type="text" maxlength="500" placeholder="게스트들에게 필요한 공간 정보를 상세하게 소개해주세요." required></td>
             </tr>
 
             <!-- 공간 태그 -->
@@ -102,7 +111,7 @@
                 <td><button class="tag-btn" type="button" onclick="insertTag()">추가 ▼</button></td>
             </tr>
             <tr class="hidden-tag">
-                <td colspan="2" class="body80"><input class="input-text" type="text" name="spaceTag" readonly required></td>
+                <td colspan="2" class="body80"><input class="input-text" type="text" th:field="${space.spaceTags}" name="spaceTag" readonly required></td>
                 <td><button type="button" onclick="deleteTag()">삭제</button></td>
             </tr>
 
@@ -120,17 +129,43 @@
                 <td><button style="height: 50px;" type="button" onclick="chooseFile(1)">파일 수정</button></td>
             </tr>
 
+            <!-- 이미지 -->
+            <tr>
+                <th>이미지<span class="red-color">*</span></th>
+                <td colspan="2" align="right">2048*1158 권장, 최대 3MB(최대 5장)</td>
+            </tr>
+            <tr class="detail-img">
+                <td colspan="2" class="body80"><input class="input-text" name="spaceImg" type="text" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, png)" disabled></td>
+                <td><button style="height: 50px;" type="button" onclick="chooseFile(2)" >파일 첨부</button></td>
+            </tr>
+            <tr class="detail-img-hidden">
+                <td colspan="3" class="img-area">
+                    <img id="content-img1" width="19%" height="160;" onclick="chooseFile(2)">
+                    <img id="content-img2" width="19%" height="160;" onclick="chooseFile(3)">
+                    <img id="content-img3" width="19%" height="160;" onclick="chooseFile(4)">
+                    <img id="content-img4" width="19%" height="160;" onclick="chooseFile(5)">
+                    <img id="content-img5" width="19%" height="160;" onclick="chooseFile(6)">
+                </td>
+            </tr>
+            <tr><td colspan="3"></td></tr>
+
+
             <!-- 주소 -->
             <tr>
                 <th>주소<span class="red-color">*</span></th>
                 <td colspan="2" align="right"></td>
             </tr>
             <tr>
-                <td colspan="2"><input id="spaceAddress" class="input-text" type="text" name="spaceAddress" placeholder="실제 서비스되는 공간의 주소를 입력해주세요." required readonly></td>
+                <td colspan="2"><input id="spaceAddress" class="input-text" type="text" th:field="${space.spaceAddress}" name="spaceAddress" placeholder="실제 서비스되는 공간의 주소를 입력해주세요." required readonly></td>
                 <td><button type="button" onclick="searchAddr()">주소 검색</button></td>
             </tr>
             <tr>
-                <td colspan="2" class="body80"><input class="input-text" name="spaceDetailAddress" type="text" placeholder="상세주소" required></td>
+                <td colspan="2" class="body80"><input class="input-text" th:field="${space.spaceDetailAddress}" name="spaceDetailAddress" type="text" placeholder="상세주소" required></td>
+            </tr>
+
+            <tr>
+                <th>위치 정보</th>
+                <td colspan="2" align="right"><span class="textCount4">0</span>/20자</td>
             </tr>
 
             <!-- 가격 -->
@@ -138,26 +173,35 @@
                 <th>가격(1인 1시간 가격)<span class="red-color">*</span></th>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-price" class="input-text" name="spacePrice" type="number" placeholder="숫자만 입력해주세요. ex) 1000" min="0" step="100" required></td>
+                <td colspan="3"><input id="input-price" class="input-text" th:field="${space.spacePrice}" name="spacePrice" type="number" placeholder="숫자만 입력해주세요. ex) 1000" min="0" step="100" required></td>
             </tr>
 
             <!-- 전화번호 -->
             <tr>
                 <th>전화번호<span class="red-color">*</span></th>
-                <th>수용 인원<span class="red-color">*</span></th>
+                <td colspan="1" align="right"><th>수용 인원<span class="red-color">*</span></th></td>
             </tr>
             <tr>
-                <td colspan="2"><input id="input-tel" class="input-text" type="text" name="spaceTel" th:value="${loginUser?.phone}" placeholder="'-' 없이 입력해주세요." required></td>
-                <td class="body80"><input class="input-text" name="spaceCapacity" type="number" placeholder="최대 인원" min="1" required></td>
+                <td colspan="2"><input id="input-tel" class="input-text" type="text" th:field="${space.spaceTel}" name="spaceTel"  placeholder="'-' 없이 입력해주세요." required></td>
+                <td class="body80"><input class="input-text" th:field="${space.spacePrice}" name="spaceCapacity" type="number" placeholder="최대 인원" min="1" required></td>
             </tr>
         </table>
 
         <br><br>
 
-        <!-- 제출 버튼 -->
+        <div style="display: none;">
+            <input type="file" name="files" id="file1" required onchange="loadImg(this, 1)">
+            <input type="file" name="files" id="file2" onchange="loadImg(this, 2)">
+            <input type="file" name="files" id="file3" onchange="loadImg(this, 3)">
+            <input type="file" name="files" id="file4" onchange="loadImg(this, 4)">
+            <input type="file" name="files" id="file5" onchange="loadImg(this, 5)">
+            <input type="file" name="files" id="file6" onchange="loadImg(this, 6)">
+        </div>
+
+        <br><br>
         <div class="last-btns">
-            <button class="back-btn" type="button" onclick="backPage()">이전</button>
-            <button class="save-btn" type="button" onclick="clickSubmit()">저장</button>
+            <button class="back-btn" type="button" onclick="backPage()">이&nbsp&nbsp&nbsp&nbsp전</button>
+            <button class="save-btn" type="button" onclick="clickSubmit()">저&nbsp&nbsp&nbsp&nbsp장</button>
         </div>
     </form>
 </div>

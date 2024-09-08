@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+ id: method이름
+ #{}:파라미터
+ resultType:반환값
+ CREATE SEQUENCE member_seq START WITH 1 INCREMENT BY 1;
+ Enum타입은 제약조건이 자동으로 걸린다.
+
+-->
+
+<mapper namespace="com.toribro.space.repository.space.SpaceMapper"><!-- 자바 인터페이스랑 매핑-->
+
+
+    <insert id="enrollSpace" parameterMap="Space">
+
+        <selectKey keyProperty="spaceNo" resultType="Long" order="BEFORE">
+            SELECT space_seq.NEXTVAL FROM dual
+        </selectKey>
+
+        insert into space (SPACE_NO,SPACE_CAPACITY,SPACE_PRICE,SPACE_ENROLL_DATE,
+        SPACE_ADDRESS,SPACE_CAUTION,SPACE_DETAIL_ADDRESS,SPACE_ENROLL_STATUS,SPACE_INFORMATION,
+        SPACE_INTRODUCE, SPACE_KIND,SPACE_LOCATION ,SPACE_NAME,SPACE_ONE_INTRODUCE,SPACE_RESERVATION_STATUS,
+        SPACE_TAG,SPACE_TEL,USER_NO) values(#{spaceNo},#{spaceCapacity},#{spacePrice},#{spaceEnrollDate},#{spaceAddress},
+                                ,null,#{spaceDetailAddress},,'N',#{spaceInformation},#{spaceIntroduce},#{spaceKind},
+                                 #{spaceLocation},#{spaceName},#{spaceOneIntroduce},'N',#{spaceTag},#{spaceTel},
+                                 #{USER_NO});
+    </insert>
+
+    <insert id="attachmentSave" parameterType="Attachment">
+
+        <selectKey keyProperty="fileNo" resultType="Long" order="BEFORE">
+            SELECT file_seq.NEXTVAL FROM dual
+        </selectKey>
+
+       insert into  attachment (FILE_NO,CHANGE_NAME,ORIGIN_NAME,FILE_PATH,FILE_STATUS,UPDATE_DATE,SPACE_NO)
+       values(#{fileNo},#{changeName},#{originName},#{filePath},'Y',CURRENT_DATE,#{spaceNo})
+
+                                                                                                                 );
+    </insert>
+
+
+
+
+</mapper>

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Date;
+
 public class MemberDto {
 
     @Getter
@@ -55,9 +57,10 @@ public class MemberDto {
     @ToString
     public static class findDto{
 
-
-        private String userName;
+        @NotBlank(message="아이디를 입력하세요")
         private String userId;
+        @NotBlank(message="비밀번호를 입력하세요")
+        private String userPwd;
 
     }
 
@@ -65,7 +68,6 @@ public class MemberDto {
     @Setter
     @ToString
     public static class updateDto{
-
 
         private String userName;
         private String userId;

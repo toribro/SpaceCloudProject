@@ -48,34 +48,38 @@
       </tr>
       <tr>
         <td>이름</td>
-        <td class="vl" th:text="${loginUser?.userName}"></td>
+        <td class="vl" th:text="${session.loginUser.userName}"></td>
       </tr>
       <tr>
         <td>닉네임</td>
-        <td class="vl" th:text="${loginUser?.nickName}"></td>
+        <td class="vl" th:text="${session.loginUser.nickName}"></td>
       </tr>
       <tr>
         <td>성별</td>
-        <td class="vl" th:text="${loginUser?.gender}"></td>
+        <td class="vl" th:text="${session.loginUser.gender}"></td>
       </tr>
       <tr>
         <td>전화번호</td>
-<!--        <td class="vl" th:text="${#strings.format('%s-%s-%s', loginUser?.phone?.substring(0,3), loginUser?.phone?.substring(3,7), loginUser?.phone?.substring(7))}"></td>-->
+        <td class="vl" th:text="${session.loginUser.phone}"></td>
       </tr>
       <tr>
         <td>이메일주소</td>
-        <td class="vl" th:text="${loginUser?.email}"></td>
+        <td class="vl" th:text="${session.loginUser.email}"></td>
       </tr>
       <tr>
         <td>생년월일</td>
-<!--        <td class="vl" th:text="${#dates.format(${loginUser?.birth}, 'yyyy년 MM월 dd일')}"></td>-->
+        <td class="vl" th:text="${session.loginUser.birth}"></td>
+      </tr>
+      <tr>
+        <td>가입일</td>
+        <td class="vl" th:text="${session.loginUser.joinDate}"></td>
       </tr>
     </table>
   </div>
 
   <div id="bottom-area">
     <form th:action="@{/guest/reservationList}" method="get">
-      <input type="hidden" name="userId" th:value="${loginUser?.userId}">
+      <input type="hidden" name="userId" th:value="${session.loginUser?.userNo}">
       <input type="hidden" name="cpage" value="1">
       <input type="submit" value="예약내역" id="Reservation_details">
     </form>

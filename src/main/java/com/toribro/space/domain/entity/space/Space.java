@@ -13,6 +13,8 @@ import java.util.List;
 @Setter
 @Table(name="SPACE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class Space {
 
  ///@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,18 +22,31 @@ public class Space {
     @Column(name="space_no")
     private int spaceNo;
 
+    @Column(unique=true,nullable=false)
     private String spaceName;
+
+    @Column(nullable=false)
     private String spaceKind;
+
+    @Column(nullable=false)
     private String spaceOneIntroduce;
+
+    @Column(nullable=false)
     private String spaceIntroduce;
+
     private String spaceTag;
+
+    @Column(nullable=false)
     private String spaceInformation;
     private String spaceCaution;
     private String spaceMImg;//공간 메인 이미지
     private String spaceImg;//공간이미지
+    @Column(nullable=false)
     private String spaceAddress;
+    @Column(nullable=false)
     private String spaceDetailAddress;
     private int spacePrice;
+    @Column(nullable=false)
     private String spaceLocation;
     private String spaceTel;
     private int spaceCapacity;

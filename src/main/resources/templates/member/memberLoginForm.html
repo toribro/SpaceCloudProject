@@ -42,10 +42,12 @@
     </div>
 
     <!-- Form action for login -->
-    <form th:action="@{login}" method="post">
+    <form th:action="@{login}" th:method="post">
       <div class="member-login">
-        <input type="text" id="userId" name="userId" placeholder="아이디" th:value="${cookie?.saveId?.value}"><br>
-        <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호">
+        <input type="text" id="userId" name="userId" th:field="${login.userId}" placeholder="아이디" th:errorclass="field-error" th:value="${cookie?.saveId?.value}"><br>
+        <span class="field-error " th:errors="${login.userId}"></span>
+        <input type="password" id="userPwd" name="userPwd"  th:errorclass="field-error" th:field="${login.userPwd}" placeholder="비밀번호">
+        <span class="field-error " th:errors="${login.userPwd}"></span>
         <label for="remember" id="saveId"> 아이디 저장 </label>
         <input type="checkbox" id="idSaveCheck" name="saveId" th:checked="${cookie?.saveId != null}"><br>
       </div>

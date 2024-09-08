@@ -14,7 +14,7 @@
 <mapper namespace="com.toribro.space.repository.member.MemberMapper"><!-- 자바 인터페이스랑 매핑-->
 
 
-    <insert id="save" keyProperty="userNo" >
+    <insert id="save" parameterType="user" >
 
         <selectKey keyProperty="userNo" resultType="Long" order="BEFORE">
             SELECT member_seq.NEXTVAL FROM dual
@@ -22,18 +22,25 @@
 
         insert into Member (user_no,join_date,modify_date,birth,
                           email,gender,nick_name,out_status,phone,user_admin,user_host,user_id,user_name,user_pwd)
-        values (#{userNo},null,null,#{birth},#{email},#{gender},#{nickName},'N',#{phone},'N','HOST',#{userId},#{userName},#{userPwd})
+        values (#{userNo},current_date,null,#{birth},#{email},#{gender},#{nickName},'N',#{phone},'N','HOST',#{userId},#{userName},#{userPwd})
     </insert>
 
-    <update id="update">
+<!--    <update id="update">-->
 
-    </update>
+<!--    </update>-->
 
-    <select id="findById"  resultType="Member"><!-- domain.item-->
-
-
+    <select id="findMember" resultType="Member">
+         SELECT user_no ,user_name,user_id,nick_name,gender,phone,email,  join_date,birth
+         FROM MEMBER
+         WHERE user_id = #{id} and user_pwd = #{password}
 
     </select>
+
+<!--    <select id="findById"  resultType="Member">-->
+
+
+
+<!--    </select>-->
 
     <!--
       if 가 하나라도 성공하면 and를 where로 바꿔준다.

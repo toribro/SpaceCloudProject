@@ -1,7 +1,9 @@
 package com.toribro.space.controller.member;
 
 import com.toribro.space.domain.dto.member.MemberDto;
+import com.toribro.space.domain.entity.member.Member;
 import com.toribro.space.service.member.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +52,7 @@ public class MemberController {
     @PostMapping
     public String join(@Validated @ModelAttribute("member") MemberDto.CreateDto member,
                        BindingResult bindingResult, Model model , HttpSession session){
+
         log.info("회원가입");
         log.info("{}",member);
         Map<String, String> errors = new HashMap<>();
@@ -95,25 +98,43 @@ public class MemberController {
         return "redirect:/";
     }
 
-
-
     //////
 
     //로그인페이지
     @GetMapping("/login")
-    public String loginForm(){
+    public String loginForm(Model model){
+        model.addAttribute("login",new MemberDto.findDto());
         return "member/memberLoginForm";
     }
 
     //로그인
     @PostMapping("/login")
-    public String login(){
-        return "redirect:/";
+    public String login(@Validated @ModelAttribute MemberDto.findDto loginInfo,
+                        BindingResult bindingResult, Model model,HttpSession session){
+
+        if(bindingResult.hasErrors()){
+            log.info("errors={}",bindingResult);//에러 확인
+            return "member/memberLoginForm";
+        }
+
+        Member member = memberService.findMember(loginInfo);
+        log.info("{}",member);
+        if(member!=null){
+            session.setAttribute("loginUser",member);
+            session.setAttribute("alertMsg","로그인되었습니다.");
+            return "redirect:/";
+        }else{
+            session.setAttribute("alertMsg","아이디나 비밀번호가 일치하지 않습니다.");
+            return "redirect:/member/login";
+        }   
+        
     }
 
     //로그아웃
     @GetMapping("/logout")
-    public String logout(){
+    public String logout(HttpSession session){
+        session.removeAttribute("loginUser");
+        session.setAttribute("alertMsg","로그아웃되었습니다.");
         return "redirect:/";
     }
 
