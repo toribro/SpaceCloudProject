@@ -3,6 +3,7 @@ package com.toribro.space.service.space;
 import com.toribro.space.domain.dto.space.SpaceDto;
 import com.toribro.space.domain.entity.common.Attachment;
 import com.toribro.space.domain.entity.space.Space;
+import com.toribro.space.domain.entity.space.vo.SpaceAttachment;
 import com.toribro.space.repository.space.SpaceMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
 @Service
@@ -98,7 +100,14 @@ public class SpaceServiceImpl implements SpaceService {
     }
 
     @Override
-    public List<Space> spaces() {
-        return List.of();
+    public List<SpaceAttachment> getSpaces() {
+
+        try{
+            return spaceMapper.getSpaces();
+
+        }catch(MyBatisSystemException e){
+            e.printStackTrace();
+        }
+       return null;
     }
 }

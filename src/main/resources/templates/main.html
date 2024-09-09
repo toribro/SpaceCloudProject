@@ -106,12 +106,11 @@
     <section class="main-grid">
         <div th:each="sp : ${spList}" class="info-preview" th:onclick="'detailView(' + ${sp.spaceNo} + ')'">
             <div class="space-picture">
-                <img th:src="@{${sp.spaceMimg}}" alt="썸네일" width="100%" height="100%">
+                <img th:src="@{/images/{imageName}(imageName=${sp.getChangeName()})}" alt="썸네일" width="100%" height="100%">
             </div>
             <div class="space-info">
                 <div class="title-area" style="margin-bottom: 5px;">
                     <b th:text="${sp.spaceName}"></b>
-                    <span><i class="fa-regular fa-thumbs-up"></i> <span th:text="${sp.spaceCount}"></span></span>
                 </div>
                 <p>
                     <span th:text="${sp.spaceAddress}"></span><br>

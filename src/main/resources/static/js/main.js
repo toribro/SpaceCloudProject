@@ -34,5 +34,5 @@ document.getElementById('map-btn').addEventListener('click', function () {
 });
 
 function detailView(spaceNo) {
-    location.href = 'detailview.sp?spaceNo=' + spaceNo;
+    location.href = '/space/detail?spaceNo=' + spaceNo;
 }
