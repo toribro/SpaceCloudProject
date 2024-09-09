@@ -17,11 +17,8 @@ public class Attachment {
 
     @Id
     private int fileNo;
-    @Column(nullable = false ,unique = true )
     private String originName;
-    @Column(nullable = false ,unique = true )
     private String changeName;
-    @Column(nullable = false ,unique = true )
     private String filePath;
     private Date uploadDate;
     private int fileLevel;
@@ -33,7 +30,8 @@ public class Attachment {
     @JoinColumn(name="space_no")
     private Space space;
 
-    private void addSpace(Space space) {
+    public void addSpace(Space space) {
         this.space = space;
     }
+
 }

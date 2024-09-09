@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SpaceMapper {
-    void enrollSpace(Space space);
-    void attachmentSave(@Param("spaceNo") int spaceNo, Attachment attachment);
+    void enrollSpace(@Param("userNo") Long userNo, @Param("space")  Space space);
+    void attachmentSave(@Param("spaceNo") int spaceNo, @Param("attachment") Attachment attachment);
 }

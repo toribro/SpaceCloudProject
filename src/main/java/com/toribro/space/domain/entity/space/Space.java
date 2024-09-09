@@ -1,5 +1,6 @@
 package com.toribro.space.domain.entity.space;
 
+import com.toribro.space.domain.entity.common.Attachment;
 import com.toribro.space.domain.entity.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
@@ -51,7 +52,6 @@ public class Space {
     private String spaceTel;
     private int spaceCapacity;
     private LocalDateTime spaceEnrollDate;
-    private int spaceCount;
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus spaceReservationStatus;
@@ -70,6 +70,9 @@ public class Space {
     @OneToMany(mappedBy="space",fetch = FetchType.LAZY )
     private List<SpaceOption> spaceOptions= new ArrayList<>();
 
+    @OneToMany(mappedBy = "space",fetch = FetchType.LAZY )
+    private List<Attachment> attachments= new ArrayList<>();
+
 
     //편의 메소드
     public void addMember(Member member){
@@ -82,6 +85,10 @@ public class Space {
           spaceCateGory.setSpace(this);
 
 
+    }
+    public void addAttachment(Attachment attachment){
+       this.attachments.add(attachment);
+       attachment.setSpace(this);
     }
 
 

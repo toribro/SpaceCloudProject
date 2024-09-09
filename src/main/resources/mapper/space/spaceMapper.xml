@@ -14,31 +14,58 @@
 <mapper namespace="com.toribro.space.repository.space.SpaceMapper"><!-- 자바 인터페이스랑 매핑-->
 
 
-    <insert id="enrollSpace" parameterMap="Space">
+    <insert id="enrollSpace" parameterType="Space">
 
-        <selectKey keyProperty="spaceNo" resultType="Long" order="BEFORE">
+        <selectKey keyProperty="space.spaceNo" resultType="int" order="BEFORE">
             SELECT space_seq.NEXTVAL FROM dual
         </selectKey>
 
-        insert into space (SPACE_NO,SPACE_CAPACITY,SPACE_PRICE,SPACE_ENROLL_DATE,
-        SPACE_ADDRESS,SPACE_CAUTION,SPACE_DETAIL_ADDRESS,SPACE_ENROLL_STATUS,SPACE_INFORMATION,
-        SPACE_INTRODUCE, SPACE_KIND,SPACE_LOCATION ,SPACE_NAME,SPACE_ONE_INTRODUCE,SPACE_RESERVATION_STATUS,
-        SPACE_TAG,SPACE_TEL,USER_NO) values(#{spaceNo},#{spaceCapacity},#{spacePrice},#{spaceEnrollDate},#{spaceAddress},
-                                ,null,#{spaceDetailAddress},,'N',#{spaceInformation},#{spaceIntroduce},#{spaceKind},
-                                 #{spaceLocation},#{spaceName},#{spaceOneIntroduce},'N',#{spaceTag},#{spaceTel},
-                                 #{USER_NO});
+        insert into space (SPACE_NO,
+                           SPACE_CAPACITY,
+                           SPACE_PRICE,
+                           SPACE_ENROLL_DATE,
+                            SPACE_ADDRESS,
+                           SPACE_CAUTION,
+                           SPACE_DETAIL_ADDRESS,
+                           SPACE_ENROLL_STATUS,
+                           SPACE_INFORMATION,
+                           SPACE_INTRODUCE,
+                           SPACE_KIND,
+                           SPACE_LOCATION,
+                           SPACE_NAME,
+                           SPACE_ONE_INTRODUCE,
+                           SPACE_RESERVATION_STATUS,
+                           SPACE_TAG,
+                           SPACE_TEL,
+                           USER_NO)
+                           values(#{space.spaceNo},
+                               #{space.spaceCapacity},
+                               #{space.spacePrice},
+                               current_date,
+                               #{space.spaceAddress},
+                                #{space.spaceCaution},
+                                #{space.spaceDetailAddress},
+                                 'N',
+                                  #{space.spaceInformation},
+                                  #{space.spaceIntroduce},
+                                  #{space.spaceKind},
+                                 #{space.spaceLocation},
+                                  #{space.spaceName},
+                                  #{space.spaceOneIntroduce},
+                                  'N',
+                                   #{space.spaceTag},
+                                  #{space.spaceTel},
+                                 #{userNo})
     </insert>
 
     <insert id="attachmentSave" parameterType="Attachment">
 
-        <selectKey keyProperty="fileNo" resultType="Long" order="BEFORE">
+        <selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
             SELECT file_seq.NEXTVAL FROM dual
         </selectKey>
 
-       insert into  attachment (FILE_NO,CHANGE_NAME,ORIGIN_NAME,FILE_PATH,FILE_STATUS,UPDATE_DATE,SPACE_NO)
-       values(#{fileNo},#{changeName},#{originName},#{filePath},'Y',CURRENT_DATE,#{spaceNo})
-
-                                                                                                                 );
+       insert into  attachment (FILE_NO,CHANGE_NAME,ORIGIN_NAME,FILE_PATH,FILE_STATUS,UPLOAD_DATE,FILE_LEVEL,SPACE_NO)
+       values(#{fileNo},#{attachment.changeName},#{attachment.originName},#{attachment.filePath},'Y',CURRENT_DATE,#{attachment.fileLevel},#{spaceNo})
     </insert>
 
 

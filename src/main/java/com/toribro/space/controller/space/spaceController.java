@@ -11,6 +11,9 @@ public class spaceController {
 
     @GetMapping("/detail")
     public String spaceDetail(@RequestParam(defaultValue = "1") int spaceNo) {
+
+
+
         return "space/spaceDetail";
     }
 }

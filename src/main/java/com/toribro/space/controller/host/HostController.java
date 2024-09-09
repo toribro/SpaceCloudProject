@@ -1,7 +1,11 @@
 package com.toribro.space.controller.host;
 
 import com.toribro.space.domain.dto.space.SpaceDto;
+import com.toribro.space.domain.entity.member.Member;
+import com.toribro.space.service.space.SpaceService;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,13 +21,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 @Controller
 @RequestMapping("/host")
 @Slf4j
+@RequiredArgsConstructor
 public class HostController {
 
+    private final SpaceService spaceService;
 
     @Value("${file.dir}")
     private String uploadDir;
@@ -59,21 +66,32 @@ public class HostController {
     public String hostEnrollPost(@ModelAttribute SpaceDto.EnrollDto space,
                                  List<MultipartFile> files,HttpSession session){
 
+        Member member = (Member) session.getAttribute("loginUser");
+        space.setUserNo(member.getUserNo());
+
         log.info("files: {}",files);
         log.info("{}",space);
         log.info("{}",uploadDir);
-        Map<String,String> fileNames= new ConcurrentHashMap<>();
-      //  String path="src/main/resources/static/img/space/";
+        List<SpaceDto.SpaceAttachmentDto> fileInfo= new CopyOnWriteArrayList<>();
+
+
+
+        int level=1;
         if(files!=null) {
 
             for(MultipartFile f :files) {
+                SpaceDto.SpaceAttachmentDto file=new SpaceDto.SpaceAttachmentDto();
                 String changeName=saveFile(f,session,uploadDir);
-                //changeNamesList.add(changeName);
-                fileNames.put(f.getOriginalFilename(),changeName);
+                file.setFileLevel(level++);
+                file.setOriginName(f.getOriginalFilename());
+                file.setChangeName(changeName);
+                file.setFilePath(uploadDir);
+                fileInfo.add(file);
             }
         }
+        log.info("{}",fileInfo);
 
-
+        int result = spaceService.enroll(space, fileInfo);
 
         return "redirect:/host";
     }

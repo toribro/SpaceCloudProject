@@ -1,13 +1,11 @@
 package com.toribro.space.domain.dto.space;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
-import java.sql.Date;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 /*
@@ -52,19 +50,28 @@ public class SpaceDto {
         @NotBlank(message="상세주소는 필수입니다.")
         private String spaceDetailAddress;
 
-        private String spaceLocation;
-
         @NotBlank(message="전화번호는 필수 입니다.")
         private String spaceTel;
 
         @NotBlank(message="가격을 입력하세요")
-        private String spacePrice;
+        private int spacePrice;
 
         @NotBlank(message="수용인원은 필수 입니다.")
         private int spaceCapacity;
 
-//        @NotBlank
-//        private int userNo;
+        @NotBlank(message="공간 정보는 필수 입니다.")
+        private String spaceInformation;
+
+        @NotBlank(message="예약시 주의사항은 필수 입니다.")
+        private String spaceCaution;
+
+        @NotBlank(message="위치 정보는 필수 입니다.")
+        private String spaceLocation;
+
+
+        //로직처리
+        private Long userNo;
+        private String spaceKindValues;
 
     }
 

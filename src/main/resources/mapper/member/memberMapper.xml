@@ -14,7 +14,7 @@
 <mapper namespace="com.toribro.space.repository.member.MemberMapper"><!-- 자바 인터페이스랑 매핑-->
 
 
-    <insert id="save" parameterType="user" >
+    <insert id="save" parameterType="Member" >
 
         <selectKey keyProperty="userNo" resultType="Long" order="BEFORE">
             SELECT member_seq.NEXTVAL FROM dual

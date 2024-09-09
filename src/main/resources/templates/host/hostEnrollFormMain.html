@@ -115,6 +115,35 @@
                 <td><button type="button" onclick="deleteTag()">삭제</button></td>
             </tr>
 
+            <!--시설 안내  -->
+            <tr>
+                <th>시설 안내<span class="red-color">*</span></th>
+                <td colspan="2" align="right">최대 10개</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="body80"><input class="input-text" id="spaceInformation-input" type="text" th:field="${space.spaceInformation}" placeholder="이용 가능한 시설에 대해 최대한 상세하게 입력해주세요. (최대 10개)" ></td>
+                <td><button class="spaceInfo-btn" type="button" onclick="insertSpaceInfo()">추가 ▼</button></td>
+            </tr>
+            <tr><td class="hidden-spaceinfo-btn"><button type="button" onclick="deleteSpaceInfo()">삭제</button></td></tr>
+            <tr class="hidden-spaceinfo">
+            </tr>
+            <tr><td colspan="3"></td></tr>
+
+            <!-- 예악 시 주의 사항 -->
+            <tr>
+                <th >예약 시 주의사항<span class="red-color">*</span></th>
+                <td colspan="2" align="right">최대 10개</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="body80"><input class="input-text" id="spaceCaution-input" th:field="${space.spaceCaution}" type="text" placeholder="게스트들이 예약 시 확인해야 하는 주의사항을 입력해주세요. (최대 10개)" ></td>
+                <td><button class="caution-btn" type="button" onclick="insertCaution()">추가 ▼</button></td>
+            </tr>
+            <tr><td class="hidden-caution-btn"><button type="button" onclick="deleteCaution()">삭제</button></td></tr>
+            <tr class="hidden-caution">
+            </tr>
+            <tr><td colspan="3"></td></tr>
+            <tr>
+
             <!-- 대표 이미지 -->
             <tr>
                 <th>대표 이미지<span class="red-color">*</span></th>
@@ -162,10 +191,15 @@
             <tr>
                 <td colspan="2" class="body80"><input class="input-text" th:field="${space.spaceDetailAddress}" name="spaceDetailAddress" type="text" placeholder="상세주소" required></td>
             </tr>
-
             <tr>
                 <th>위치 정보</th>
                 <td colspan="2" align="right"><span class="textCount4">0</span>/20자</td>
+            </tr>
+            <tr>
+                <td colspan="3"><input id="input-shortinfo" class="input-text input-host4" th:field="${space.spaceLocation}" name="spaceLocation" type="text" maxlength="20" placeholder="ex) 동대문역사문화공원역 도보 1분 거리"></td>
+            </tr>
+            <tr>
+                <th></th>
             </tr>
 
             <!-- 가격 -->
@@ -183,7 +217,7 @@
             </tr>
             <tr>
                 <td colspan="2"><input id="input-tel" class="input-text" type="text" th:field="${space.spaceTel}" name="spaceTel"  placeholder="'-' 없이 입력해주세요." required></td>
-                <td class="body80"><input class="input-text" th:field="${space.spacePrice}" name="spaceCapacity" type="number" placeholder="최대 인원" min="1" required></td>
+                <td class="body80"><input class="input-text" th:field="${space.spaceCapacity}" name="spaceCapacity" type="number" placeholder="최대 인원" min="1" required></td>
             </tr>
         </table>
 
