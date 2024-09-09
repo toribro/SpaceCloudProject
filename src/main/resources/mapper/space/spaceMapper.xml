@@ -68,12 +68,28 @@
        values(#{fileNo},#{attachment.changeName},#{attachment.originName},#{attachment.filePath},'Y',CURRENT_DATE,#{attachment.fileLevel},#{spaceNo})
     </insert>
 
-    <select id="getSpaces" parameterType="SpaceAttachment">
-            SELECT A.SPACE_NO,SPACE_NAME,SPACE_ADDRESS,SPACE_TAG,
-                   SPACE_PRICE,SPACE_CAPACITY,FILE_PATH,ORIGIN_NAME,CHANGE_NAME
-            FROM SPACE S JOIN ATTACHMENT  A ON (S.SPACE_NO=A.SPACE_NO)
-            WHERE FILE_LEVEL=1 AND SPACE_ENROLL_STATUS ='Y'
+<!--    <select id="getSpaces" parameterType="SpaceAttachment">-->
+<!--            SELECT A.SPACE_NO,SPACE_NAME,SPACE_ADDRESS,SPACE_TAG,-->
+<!--                   SPACE_PRICE,SPACE_CAPACITY,FILE_PATH,ORIGIN_NAME,CHANGE_NAME-->
+<!--            FROM SPACE S JOIN ATTACHMENT  A ON (S.SPACE_NO=A.SPACE_NO)-->
+<!--            WHERE FILE_LEVEL=1 AND SPACE_ENROLL_STATUS ='Y'-->
 
+<!--    </select>-->
+
+    <select id="getSpaces" parameterType="int">
+      SELECT *FROM (SELECT a.* ,
+                        ROWNUM AS RN FROM(
+                            SELECT A.SPACE_NO,SPACE_NAME,SPACE_ADDRESS,SPACE_TAG,
+                                   SPACE_PRICE,SPACE_CAPACITY,FILE_PATH,ORIGIN_NAME,CHANGE_NAME
+                            FROM SPACE S JOIN ATTACHMENT  A ON (S.SPACE_NO=A.SPACE_NO)
+                            WHERE FILE_LEVEL=1 AND SPACE_ENROLL_STATUS ='Y'
+                            ORDER BY SPACE_NO DESC
+                    )a)
+      WHERE RN BETWEEN #{startRow} and #{endRow}
+    </select>
+
+    <select id="getCount" parameterType="int">
+        SELECT COUNT(*) FROM SPACE
     </select>
 
 

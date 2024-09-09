@@ -1,5 +1,7 @@
 package com.toribro.space.service.space;
 
+import com.toribro.space.common.PageInfo;
+import com.toribro.space.common.Pagination;
 import com.toribro.space.domain.dto.space.SpaceDto;
 import com.toribro.space.domain.entity.common.Attachment;
 import com.toribro.space.domain.entity.space.Space;
@@ -9,6 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.stereotype.Service;
 
@@ -100,14 +103,29 @@ public class SpaceServiceImpl implements SpaceService {
     }
 
     @Override
-    public List<SpaceAttachment> getSpaces() {
+    public List<SpaceAttachment> getSpaces(PageInfo pageInfo) {
+
+        //마이 바티스 rowbound를 사용하여 페이징 처리
+//        int offset=(pageInfo.getCurrentPage()-1)* pageInfo.getBoardLimit();
+//        RowBounds rowBounds=new RowBounds(offset,pageInfo.getBoardLimit());
+
+        //생으로 페이징 처리
+        int startRow=(pageInfo.getCurrentPage()-1)* pageInfo.getBoardLimit()+1;
+        int endRow=startRow+pageInfo.getBoardLimit()-1;
+
 
         try{
-            return spaceMapper.getSpaces();
+            return  spaceMapper.getSpaces(startRow,endRow);
+//            return spaceMapper.getSpaces(rowBounds);
 
         }catch(MyBatisSystemException e){
             e.printStackTrace();
         }
        return null;
+    }
+
+    @Override
+    public int getCount() {
+        return spaceMapper.getCount();
     }
 }

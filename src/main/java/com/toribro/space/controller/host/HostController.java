@@ -92,8 +92,16 @@ public class HostController {
         log.info("{}",fileInfo);
 
         int result = spaceService.enroll(space, fileInfo);
+        if(result>0){
+            session.setAttribute("alertMsg","등록되었습니다.");
+            return "redirect:/host";
+        }else{
+            session.setAttribute("alertMsg","등록되었습니다.");
+            session.setAttribute("alertMsg","등록실패.");
+            return"redirect:/host/enroll";
+        }
 
-        return "redirect:/host";
+       
     }
 
     private String saveFile(MultipartFile upfile, HttpSession session, String path) {

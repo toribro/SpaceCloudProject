@@ -16,7 +16,7 @@ public class spaceController {
     private final SpaceService spaceService;
 
     @GetMapping("/detail")
-    public String spaceDetail(@RequestParam(defaultValue = "1") int spaceNo, Model model) {
+    public String spaceDetail(@RequestParam(defaultValue = "1") int spaceNo,Model model) {
 
 
         return "space/spaceDetail";
