@@ -125,24 +125,20 @@
     </section>
 
 
-    <div th:if="${pi!=null}" class="paging-area" align="center">
-        <button th:if="${pi.currentPage != 1}" th:onclick="'location.href='| @{/main.sp(cpage=${pi.currentPage - 1})}|">
+    <div class="paging-area" align="center">
+        <button  type="button" th:if="${pi.currentPage != 1}" th:onclick="|location.href='@{/(cpage=${pi.currentPage - 1})}'|">
             <i class="fa-solid fa-chevron-left"></i>
         </button>
 
-        <button th:each="p : ${#numbers.sequence(pi.startPage, pi.endPage)}"
-                th:if="${pi.currentPage == p}" disabled>
+
+        <button  type="button"  th:each="p : ${#numbers.sequence(pi.startPage, pi.endPage)}"
+                th:attr="disabled=${pi.currentPage == p}?'disabled':null"
+                th:onclick="|location.href='@{/(cpage=${p})}'|">
             <span th:text="${p}"></span>
         </button>
 
-        <button th:each="p : ${#numbers.sequence(pi.startPage, pi.endPage)}"
-                th:unless="${pi.currentPage == p}"
-                th:onclick="'location.href=' + @{/main.sp(cpage=${p})}">
-            <span th:text="${p}"></span>
-        </button>
-
-        <button th:if="${pi.currentPage != pi.endPage}"
-                th:onclick="'location.href=' + @{/main.sp(cpage=${pi.currentPage + 1})}">
+        <button  type="button"  th:if="${pi.currentPage != pi.endPage}"
+                th:onclick="|location.href='@{/(cpage=${pi.currentPage +1})}'|">
             <i class="fa-solid fa-chevron-right"></i>
         </button>
     </div>

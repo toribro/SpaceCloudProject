@@ -26,6 +26,7 @@ public class MainController {
         PageInfo spacePage= Pagination.getPageInfo(count,cpage,10,9);
         log.info("{}",count);
 
+        model.addAttribute("pi",spacePage);
         model.addAttribute("spList",spaceService.getSpaces(spacePage));
         return "main";
     }
