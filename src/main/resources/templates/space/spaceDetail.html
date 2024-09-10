@@ -61,8 +61,8 @@
 
 <nav id="main" class="navbar-light bg-light">
     <input id="spaceNum" type="text" th:value="${space?.spaceNo}" hidden> <!-- 공간번호 -->
-    <input id="userNo" type="text" th:value="${userNo}" hidden>
-    <input id="hostCheck" type="text" th:value="${hostCheck} ?'true' : 'false'" hidden>
+    <input id="userNo" type="text" th:value="${session.loginUser?.getUserNo()}" hidden>
+<!--    <input id="hostCheck" type="text" th:value="${hostCheck} ?'true' : 'false'" hidden>-->
 
     <div id="section_1">
         <span class="distance_option" th:text="${space?.spaceLocation}"></span>
@@ -75,8 +75,8 @@
         <!-- Space images -->
         <div id="space_comment" class="space">
             <div class="img_div">
-                <img th:each="attachment : ${attachments}" th:src="@{/ + ${attachment.filePath} + ${attachment.changeName}}" />
-                <img th:if="${!#lists.isEmpty(attachments)}" th:src="@{/ + ${attachments[0].filePath} + ${attachments[0].changeName}}" />
+                <img th:each="attachment : ${space.attachments}" th:src="@{/images/{imageName}(imageName=${attachment.getChangeName()})}" />
+<!--                <img th:if="${!#lists.isEmpty(space.attachments)}" th:src="@{/ + ${attachments[0].filePath} + ${attachments[0].changeName}}" />-->
             </div>
         </div>
 
@@ -84,7 +84,7 @@
         <div style="margin-bottom: 50px; font-size: 25px;">
             <div th:text="${space?.spaceOneIntroduce}"></div>
             <div id="spaceTage" style="font-size:17px;">
-                    <span th:each="tag : ${tags}">
+                    <span th:each="tag : ${space.getSpaceTag()}">
                         <a href="#" style="color: #2d10e6;" th:text="${tag}"></a>&nbsp;
                     </span>
             </div>
@@ -110,7 +110,7 @@
             <span class="location" th:text="${space?.spaceLocation}"></span>
             <span th:text="${space?.spaceIntroduce}"></span><br><br>
 
-            <span th:each="tag : ${tags}" style="color: #54535a; font-size: 15px;" th:text="${tag}"></span>&nbsp;
+            <span th:each="tag : ${space.getSpaceIntroduce()}" style="color: #54535a; font-size: 15px;" th:text="${tag}"></span>&nbsp;
 
             <span class="information_detail">
                     📢오픈 기념 후기 EVENT 진행중!📸<br><br>
@@ -125,7 +125,7 @@
             <hr class="line2" style="background:rgb(235, 229, 229)">
         </div>
         <div id="space_guide_comment" class="space">
-            <div th:each="guide : ${guides}">
+            <div th:each="guide : ${space.getSpaceIntroduce()}">
                 <tr>
                     <td th:text="${guide}"></td>
                 </tr>
@@ -139,7 +139,7 @@
             <hr class="line2" style="background:rgb(235, 229, 229)">
         </div>
         <div id="reservation_warn_comment" class="space">
-            <div th:each="caution : ${cautions}">
+            <div th:each="caution : ${space.getSpaceCaution()}">
                 <tr>
                     <td th:text="${caution}"></td>
                 </tr>
@@ -160,7 +160,7 @@
         </div>
 
         <!-- Q&A Form (if user logged in) -->
-        <div th:if="${member?.userId != null}">
+        <div th:if="${session.loginUser != null}">
             <div class="container mt-4">
                 <div class="card">
                     <div class="card-header bg-primary text-white">QA등록</div>
@@ -274,7 +274,7 @@
 
     <!-- Section 2: Guest reservation -->
     <div id="section_2">
-<!--        <div th:if="${spaceKind == 'spaces' and member?.userNo != space?.userNo}">-->
+        <div th:if="${session.loginUser==null or session.loginUser?.userNo != space?.userNo}">
         <div>
             <!-- Guest-specific content -->
             <div id="detail_space" class="title">
@@ -292,7 +292,7 @@
                 </div>
 
                 <div id="space_detail_comment">
-                    <div class="img_div"><img th:src="@{/ + ${space?.spaceMimg}}"></div>
+                    <div class="img_div"><img th:src="@{/ + ${space?.getAttachments()?.get(0)}}"></div>
                     <div>세부공간이미지</div>
                     <br>
                     <table>
@@ -466,19 +466,13 @@
 
         <div align="center" style="margin-top:0px;">
 
-            <button th:if="${member?.getUserId()!=null}"  type="button" class="navbar-toggler button" data-toggle="modal"  data-target="#pay-modal" id="reservation_btn" style="color:white">예약하기</button>
-            <button th:if="${member?.getUserId()!=null}"  id="category_btn"   class="navbar-toggler button" type="button"  style="color:white" onclick="location.href='/'">목록으로</button>
+            <button th:if="${session.loginUser!=null}"  type="button" class="navbar-toggler button" data-toggle="modal"  data-target="#pay-modal" id="reservation_btn" style="color:white">예약하기</button>
+            <button th:if="${session.loginUser!=null}"  id="category_btn"   class="navbar-toggler button" type="button"  style="color:white" onclick="location.href='/'">목록으로</button>
 
-            <button  th:if="${member==null}" class="navbar-toggler button" type="button"  >로그인하세요</button>
+            <button  th:if="${session.loginUser==null}" class="navbar-toggler button" type="button"  >로그인하세요</button>
 
         </div>
 
-
-
-
-
-
-    </div>
     </div>
 
     <!-- Payment modal for guest -->
@@ -495,7 +489,7 @@
                         <table>
                             <tr>
                                 <th>사용자 이름:</th>
-                                <td th:text="${member?.userId != null ? member?.userName : 'none'}"></td>
+                                <td th:text="${session.loginUser != null ? session.loginUser.userName : 'none'}"></td>
                             </tr>
                             <tr>
                                 <th>예약 날짜:</th>
@@ -516,7 +510,7 @@
                         </table>
                         <br>
                         <button id="edit-pwd-btn" type="submit" class="btn btn-sm btn-secondary">결제하기</button>
-                        <input id="userName" type="text" name="name" th:value="${member?.userId != null ? member?.userName : 'none'}" hidden>
+                        <input id="userName" type="text" name="name" th:value="${session.loginUser != null ? session.loginUser.userName : 'none'}" hidden>
                         <input type="text" id="payment" name="payment" hidden>
                         <input type="text" id="personalCount" name="count" hidden>
                         <input type="text" id="reservationTime" name="time" hidden>
@@ -527,8 +521,8 @@
         </div>
     </div>
 
-    <!-- Host-specific section -->
-    <div th:if="${spaceKind == 'spaces' and member?.userNo == space?.userNo}">
+
+    <div th:if="${session.loginUser?.userNo== space.getUserNo()}">
         <div id="detail_myspace">
             <div id="space_detail_select">
                 <div class="text2">공간유형</div>
@@ -571,18 +565,14 @@
         </div>
     </div>
 
-    <!-- Admin mode -->
-    <div th:if="${adminCheck}
-            and ${spaceKind == 'spaces'}
-            and ${member != null}
-            and ${space != null}
-            and ${member.userNo} != ${space.userNo}" align="center">
+
+    <div th:if="${session.loginUser?.userNo} == ${space.userNo}" align="center">
         <div>관리자 모드</div>
-        <button type="button" class="button" th:onclick="'location.href=@{/updateForm.sp?spaceNum=' + ${space?.spaceNo}'">수정하기</button>
+        <button type="button" class="button" th:onclick="|location.href='@{/update?spaceNo=${space?.spaceNo}'|">수정하기</button>
         <form action="#" method="post" style="display: inline;">
             <button type="button" class="button" onclick="cancelReservation('[[${space.spaceNo}]]')">삭제하기</button>
         </form>
-        <button type="button" class="button" th:onclick="'location.href=@{/main.ho}'">호스트 홈</button>
+        <button type="button" class="button" th:onclick="|location.href='@{/host}'|">호스트 홈</button>
     </div>
 </nav>
 

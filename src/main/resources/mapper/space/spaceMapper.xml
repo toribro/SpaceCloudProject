@@ -64,8 +64,22 @@
             SELECT file_seq.NEXTVAL FROM dual
         </selectKey>
 
-       insert into  attachment (FILE_NO,CHANGE_NAME,ORIGIN_NAME,FILE_PATH,FILE_STATUS,UPLOAD_DATE,FILE_LEVEL,SPACE_NO)
-       values(#{fileNo},#{attachment.changeName},#{attachment.originName},#{attachment.filePath},'Y',CURRENT_DATE,#{attachment.fileLevel},#{spaceNo})
+       insert into  attachment (FILE_NO,
+                                CHANGE_NAME,
+                                ORIGIN_NAME,
+                                FILE_PATH,
+                                FILE_STATUS,
+                                UPLOAD_DATE,
+                                FILE_LEVEL,
+                                SPACE_NO)
+                     values(#{fileNo},
+                         #{attachment.changeName},
+                         #{attachment.originName},
+                         #{attachment.filePath},
+                         'Y',
+                         CURRENT_DATE,
+                         #{attachment.fileLevel},
+                         #{spaceNo})
     </insert>
 
 <!--    <select id="getSpaces" parameterType="SpaceAttachment">-->
@@ -90,6 +104,43 @@
 
     <select id="getCount" parameterType="int">
         SELECT COUNT(*) FROM SPACE
+    </select>
+
+    <select id="getSpace" parameterType="Space">
+
+        SELECT SPACE_NO,
+               SPACE_CAPACITY,
+               SPACE_PRICE,
+               SPACE_ENROLL_DATE,
+               SPACE_ADDRESS,
+               SPACE_CAUTION,
+               SPACE_DETAIL_ADDRESS,
+               SPACE_INFORMATION,
+               SPACE_INTRODUCE,
+               SPACE_KIND,
+               SPACE_LOCATION,
+               SPACE_NAME,
+               SPACE_ONE_INTRODUCE,
+               SPACE_TAG,
+               SPACE_TEL,
+               USER_NO
+        FROM SPACE
+         WHERE SPACE_NO =#{spaceNo}
+                   AND SPACE_ENROLL_STATUS ='Y'
+
+
+    </select>
+
+    <select id="getAttachment" parameterType="Attachment">
+        SELECT    FILE_NO,
+                       CHANGE_NAME,
+                       ORIGIN_NAME,
+                       FILE_PATH,
+                       FILE_LEVEL
+             FROM ATTACHMENT
+              WHERE SPACE_NO=#{spaceNo}
+              AND  FILE_LEVEL != 1 AND FILE_STATUS='Y'
+
     </select>
 
 

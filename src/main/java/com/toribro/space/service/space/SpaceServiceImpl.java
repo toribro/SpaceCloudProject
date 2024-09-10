@@ -1,23 +1,20 @@
 package com.toribro.space.service.space;
 
 import com.toribro.space.common.PageInfo;
-import com.toribro.space.common.Pagination;
 import com.toribro.space.domain.dto.space.SpaceDto;
 import com.toribro.space.domain.entity.common.Attachment;
 import com.toribro.space.domain.entity.space.Space;
-import com.toribro.space.domain.entity.space.vo.SpaceAttachment;
+import com.toribro.space.domain.entity.vo.space.SpaceAttachment;
+import com.toribro.space.domain.entity.vo.space.SpaceDetail;
 import com.toribro.space.repository.space.SpaceMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
 @Service
@@ -127,5 +124,18 @@ public class SpaceServiceImpl implements SpaceService {
     @Override
     public int getCount() {
         return spaceMapper.getCount();
+    }
+
+    @Override
+    @Transactional
+    public SpaceDetail getSpaceByOne(int spaceNo) {
+
+        SpaceDetail findSpace=spaceMapper.getSpace(spaceNo);
+        List<Attachment> spaceAttachment= spaceMapper.getAttachment(spaceNo);
+        findSpace.setAttachments(spaceAttachment);
+
+
+        return findSpace;
+
     }
 }

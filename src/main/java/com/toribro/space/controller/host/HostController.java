@@ -16,10 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -80,13 +77,16 @@ public class HostController {
         if(files!=null) {
 
             for(MultipartFile f :files) {
-                SpaceDto.SpaceAttachmentDto file=new SpaceDto.SpaceAttachmentDto();
-                String changeName=saveFile(f,session,uploadDir);
-                file.setFileLevel(level++);
-                file.setOriginName(f.getOriginalFilename());
-                file.setChangeName(changeName);
-                file.setFilePath(uploadDir);
-                fileInfo.add(file);
+                log.info("changeName:{}",f.getOriginalFilename());
+                if(!Objects.equals(f.getOriginalFilename(), "")) {
+                    SpaceDto.SpaceAttachmentDto file=new SpaceDto.SpaceAttachmentDto();
+                    String changeName=saveFile(f,session,uploadDir);
+                    file.setFileLevel(level++);
+                    file.setOriginName(f.getOriginalFilename());
+                    file.setChangeName(changeName);
+                    file.setFilePath(uploadDir);
+                    fileInfo.add(file);
+                }
             }
         }
         log.info("{}",fileInfo);

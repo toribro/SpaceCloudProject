@@ -13,6 +13,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@ToString
 public class Attachment {
 
     @Id
@@ -26,7 +27,7 @@ public class Attachment {
     @Enumerated(EnumType.STRING)
     private FileStatus fileStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="space_no")
     private Space space;
 

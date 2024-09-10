@@ -1,4 +1,4 @@
-package com.toribro.space.domain.entity.space.vo;
+package com.toribro.space.domain.entity.vo.space;
 
 import lombok.Getter;
 import lombok.Setter;
