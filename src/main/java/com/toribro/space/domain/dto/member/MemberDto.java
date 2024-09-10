@@ -69,14 +69,20 @@ public class MemberDto {
     @ToString
     public static class updateDto{
 
-        private String userName;
-        private String userId;
+        @Pattern(message = "비밀번호는 8자 이상 20자 이하, 대소문자, 숫자, 특수문자를 모두 포함해야 합니다.",
+                regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$")
         private String userPwd;
-        private String userPwdCheck;
+
+        @NotBlank(message = "닉네임은 필수 입력 사항입니다.")
+        @Pattern(message = "닉네임은 특수 문자를 제외하고 최대 8자까지 가능합니다.", regexp = "^[a-zA-Z0-9가-힣]{1,8}$")
         private String nickName;
-        private String birth;
-        private String gender;
+
+        @NotBlank(message = "이메일은 필수 입력 사항입니다.")
+        @Email(message = "올바른 이메일 형식이어야 합니다.")
         private String email;
+
+        @NotBlank(message = "전화번호는 필수 입력 사항입니다.")
+        @Pattern(message = "전화번호 형식이 잘못되었습니다. (예: 01012345678)", regexp = "^01[016789]\\d{7,8}$")
         private String phone;
     }
 

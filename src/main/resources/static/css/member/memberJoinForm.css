@@ -124,3 +124,8 @@ td > input {
     background-color: #a50000;
     text-decoration: none;
 }
+
+.field-error {
+    color: #e81212;
+
+}

@@ -85,8 +85,14 @@ public class MemberController {
 
     //회원수정(u)
     @PatchMapping("/{userNo}")
-    public String update(@PathVariable int userNo){
+    public String update(@PathVariable Long userNo,@ModelAttribute MemberDto.updateDto updateInfo){
         log.info("회원업데이트");
+        log.info("userNo={}",userNo);
+        log.info("updateInfo.pwd={}",updateInfo.getUserPwd());//값이 안넘어오면 빈값으로 넘어온다.
+
+        memberService.updateMember(userNo,updateInfo);
+
+
         return "redirect:/";//마이페이지로 리다이렉트 할것
     }
 

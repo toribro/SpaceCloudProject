@@ -1,3 +1,89 @@
+function pwdUpdate(){//비밀번호 변경버튼 클릭시
+    let oldPwd = document.getElementById("oldPwd");
+    let userPwd = document.getElementById("userPwd");
+    let userPwdCheck = document.getElementById("userPwdCheck");
+    document.querySelectorAll(".pwd-color").forEach(function(el){ //모든 pwd-color 폰트색 검정으로 변경
+        el.style.color="black";
+    })
+    oldPwd.removeAttribute("readonly");
+    oldPwd.placeholder=" 비밀번호 입력(문자,숫자,특수문자 포함 8~20자)";
+    userPwd.removeAttribute("readonly");
+    userPwd.placeholder=" 비밀번호 입력(문자,숫자,특수문자 포함 8~20자)";
+
+    userPwdCheck.removeAttribute("readonly");
+    userPwdCheck.placeholder=" 비밀번호 재입력";
+}
+
+function canclePwdUpdate(){//비밀번호 변경 취소버튼 클릭시
+    let checkResult =document.getElementById("oldPwd-area");
+    let usealbePwd = document.querySelector(".usealbePwd");
+    let cantPwdCheck = document.querySelector(".cantPwdCheck");
+    let cantPwd = document.querySelector(".cantPwd");
+
+    let oldPwd = document.getElementById("oldPwd");
+    let userPwd = document.getElementById("userPwd");
+    let userPwdCheck = document.getElementById("userPwdCheck");
+    document.querySelectorAll(".pwd-color").forEach(function(el){ //모든 pwd-color 폰트색 회색으로 변경
+        el.style.color="#c2c0c0";
+
+        oldPwd.setAttribute("readonly",true);        //이 아래부터는 싹다 전 모습으로 되돌리기
+        oldPwd.placeholder="";
+        oldPwd.value="";
+
+        userPwd.setAttribute("readonly",true);
+        userPwd.placeholder="";
+        userPwd.value="";
+
+        userPwdCheck.setAttribute("readonly",true);
+        userPwdCheck.placeholder="";
+        userPwdCheck.value="";
+
+        checkResult.style.display="none";
+        usealbePwd.style.display="none";
+        cantPwdCheck.style.display="none";
+        cantPwd.style.display="none";
+    })
+}
+
+
+$(function(){ //현재 비밀번호 일치하는지 확인 (0.5초)
+    const pwdInput = document.getElementById("oldPwd");
+    let eventFlage;
+    pwdInput.onkeyup = function(ev){
+        clearTimeout(eventFlage);
+        const str =ev.target.value;
+        if(str.trim().length>=4){
+            eventFlag = setTimeout(function(){
+                console.log("전송");
+                $.ajax({
+                    url:"pwdCheck.me",
+                    data:{
+                        userId: document.getElementById("userId").value,
+                        oldPwd : ev.target.value
+                    },
+                    success:function(result){
+                        const checkResult =document.getElementById("oldPwd-area");
+                        checkResult.style.display="block";
+                        if(result==="NNNNN"){      //만약 비밀번호가 동일하지 않을 시
+                            checkResult.style.color="red";
+                            checkResult.innerHTML="*틀린 비밀번호입니다."
+                        }else{                      //비밀번호가 동일할 시
+                            checkResult.style.color="green";
+                            checkResult.innerHTML="확인되었습니다."
+                        }
+                    },
+                    error: function(){
+                        console.log("비밀번호 체크 실패!");
+                    }
+                })
+            },500)
+        }else{
+            document.getElementById("oldPwd-area").style.display = "none";
+        }
+    }
+})
+
+
 
 function editUser() {//빈칸 있을시 확인
     const checkResult =document.getElementById("oldPwd-area");

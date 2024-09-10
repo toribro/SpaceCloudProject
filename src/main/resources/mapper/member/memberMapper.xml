@@ -14,7 +14,7 @@
 <mapper namespace="com.toribro.space.repository.member.MemberMapper"><!-- 자바 인터페이스랑 매핑-->
 
 
-    <insert id="save" parameterType="Member" >
+    <insert id="save" parameterType="Member"  >
 
         <selectKey keyProperty="userNo" resultType="Long" order="BEFORE">
             SELECT member_seq.NEXTVAL FROM dual
@@ -25,16 +25,36 @@
         values (#{userNo},current_date,null,#{birth},#{email},#{gender},#{nickName},'N',#{phone},'N','HOST',#{userId},#{userName},#{userPwd})
     </insert>
 
-<!--    <update id="update">-->
-
-<!--    </update>-->
 
     <select id="findMember" resultType="Member">
          SELECT user_no ,user_name,user_id,nick_name,gender,phone,email,  join_date,birth
          FROM MEMBER
          WHERE user_id = #{id} and user_pwd = #{password}
-
     </select>
+
+    <select id="findByNo" resultType="Member">
+        SELECT user_no , user_pwd,user_name,user_id,nick_name,gender,phone,email,birth
+        FROM MEMBER
+        WHERE user_no = #{userNo}
+    </select>
+
+    <update id="updateMember">
+
+          UPDATE MEMBER SET NICK_NAME=#{update.nickName},
+                          EMAIL=#{update.email},
+                          NICKNAME=#{update.nickName},
+                          EMAIL=#{update.email},
+                          phone=#{update.phone}
+                  <if test="update.userPwd !='' " >
+                         ,user_pwd=#{update.userPwd}
+                  </if>
+          WHERE USER_NO=#{userNo}
+
+
+    </update>
+
+
+
 
 <!--    <select id="findById"  resultType="Member">-->
 

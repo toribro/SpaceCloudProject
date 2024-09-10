@@ -26,6 +26,7 @@ public class MyBatisConfig {
     public MemberRepository memberRepository() {
         return new MemberRepositoryImpl(memberMapper);
     }
+
     @Bean
     public SpaceService spaceService() {
         return new SpaceServiceImpl(spaceMapper);

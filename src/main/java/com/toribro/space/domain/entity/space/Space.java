@@ -65,14 +65,14 @@ public class Space {
     private Member member;
 
     @OneToMany(mappedBy="space",fetch = FetchType.LAZY )
-    private List<SpaceCateGory> spaceCateGories= new ArrayList<>();
+    private final List<SpaceCateGory> spaceCateGories= new ArrayList<>();
 
 
     @OneToMany(mappedBy="space",fetch = FetchType.LAZY )
-    private List<SpaceOption> spaceOptions= new ArrayList<>();
+    private final List<SpaceOption> spaceOptions= new ArrayList<>();
 
     @OneToMany(mappedBy = "space",fetch = FetchType.LAZY )
-    private List<Attachment> attachments= new ArrayList<>();
+    private final List<Attachment> attachments= new ArrayList<>();
 
 
     //편의 메소드

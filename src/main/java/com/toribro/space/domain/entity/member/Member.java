@@ -19,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Member {
 
 
@@ -55,7 +56,7 @@ public class Member {
 
 
     @OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
-    private List<Space> spaces=new ArrayList<>();
+    private final List<Space> spaces=new ArrayList<>();
 
     public void addSpace(Space space){
         this.spaces.add(space);
