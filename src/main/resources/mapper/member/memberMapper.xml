@@ -30,28 +30,34 @@
          SELECT user_no ,user_name,user_id,nick_name,gender,phone,email,  join_date,birth
          FROM MEMBER
          WHERE user_id = #{id} and user_pwd = #{password}
+         and out_status = 'N'
     </select>
 
-    <select id="findByNo" resultType="Member">
-        SELECT user_no , user_pwd,user_name,user_id,nick_name,gender,phone,email,birth
+    <select id="findMemberByNo" resultType="Member">
+        SELECT user_no , user_pwd,user_name,user_id,nick_name,gender,phone,email,birth,join_date
         FROM MEMBER
-        WHERE user_no = #{userNo}
+        WHERE user_no = #{userNo}and out_status = 'N'
     </select>
 
     <update id="updateMember">
 
-          UPDATE MEMBER SET NICK_NAME=#{update.nickName},
-                          EMAIL=#{update.email},
-                          NICKNAME=#{update.nickName},
-                          EMAIL=#{update.email},
-                          phone=#{update.phone}
+          UPDATE MEMBER SET nick_name=#{update.nickName},
+                          email=#{update.email},
+                          phone=#{update.phone},
+                         modify_date=current_date
                   <if test="update.userPwd !='' " >
                          ,user_pwd=#{update.userPwd}
                   </if>
-          WHERE USER_NO=#{userNo}
+          WHERE user_no=#{userNo}  and out_status = 'N'
 
 
     </update>
+
+    <delete id="deleteMember">
+            UPDATE MEMBER SET out_status='Y'
+            WHERE user_no=#{userNo}
+
+    </delete>
 
 
 

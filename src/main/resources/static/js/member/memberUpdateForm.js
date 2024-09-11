@@ -160,11 +160,11 @@ function editUser() {//빈칸 있을시 확인
         email.focus();
         return false;
     }
-    else if (select_email.value === "" || !isVailidEmail(email.value)) {
-        alert("도메인 혹은 이메일을 잘못입력하였습니다. ")
-        email.focus();
-        return false;
-    }
+    // else if (select_email.value === "" || !isVailidEmail(email.value)) {
+    //     alert("도메인 혹은 이메일을 잘못입력하였습니다. ")
+    //     email.focus();
+    //     return false;
+    // }
 
 }
 

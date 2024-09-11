@@ -131,13 +131,13 @@
         </button>
 
 
-        <button  type="button"  th:each="p : ${#numbers.sequence(pi.startPage, pi.endPage)}"
+        <button  type="button"   th:if="${pi.startPage<=pi.endPage}"  th:each="p : ${#numbers.sequence(pi.startPage, pi.endPage)}"
                 th:attr="disabled=${pi.currentPage == p}?'disabled':null"
                 th:onclick="|location.href='@{/(cpage=${p})}'|">
             <span th:text="${p}"></span>
         </button>
 
-        <button  type="button"  th:if="${pi.currentPage != pi.endPage}"
+        <button  type="button"  th:if="${pi.currentPage != pi.endPage and pi.endPage!=0 }"
                 th:onclick="|location.href='@{/(cpage=${pi.currentPage +1})}'|">
             <i class="fa-solid fa-chevron-right"></i>
         </button>

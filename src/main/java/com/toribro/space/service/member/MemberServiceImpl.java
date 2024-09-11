@@ -18,13 +18,14 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     @Override
+    @Transactional
     public void  save(MemberDto.CreateDto createDto) {
         memberRepository.save(createDto);
     }
 
     @Override
-    public Member findMemberById(Long id) {
-        return null;
+    public Member findMemberByNo(Long userNo) {
+        return memberRepository.findMemberByNo(userNo);
     }
     @Override
     public Member findMember(MemberDto.findDto findDto) {//로그인 처리
@@ -32,14 +33,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public void updateMember(Long userNo, MemberDto.updateDto updateDto) {
         memberRepository.updateMember(userNo, updateDto);
     }
 
     @Override
-    public void out(Long userNo) {
-
+    @Transactional
+    public void deleteMember(Long userNo) {
+        memberRepository.deleteMember(userNo);
     }
+
 
 
 }

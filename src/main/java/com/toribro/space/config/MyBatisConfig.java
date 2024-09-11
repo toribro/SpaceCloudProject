@@ -4,6 +4,8 @@ import com.toribro.space.repository.member.MemberMapper;
 import com.toribro.space.repository.member.MemberRepository;
 import com.toribro.space.repository.member.MemberRepositoryImpl;
 import com.toribro.space.repository.space.SpaceMapper;
+import com.toribro.space.repository.space.SpaceRepository;
+import com.toribro.space.repository.space.SpaceRepositoryImpl;
 import com.toribro.space.service.member.MemberService;
 import com.toribro.space.service.member.MemberServiceImpl;
 import com.toribro.space.service.space.SpaceService;
@@ -29,6 +31,10 @@ public class MyBatisConfig {
 
     @Bean
     public SpaceService spaceService() {
-        return new SpaceServiceImpl(spaceMapper);
+        return new SpaceServiceImpl(spaceRepository());
+    }
+    @Bean
+    SpaceRepository spaceRepository(){
+        return new SpaceRepositoryImpl(spaceMapper);
     }
 }

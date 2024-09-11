@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MemberMapper {
     void save(Member member);//무조건 void
-    Member findByNo(@Param("userNo")Long userNo);
+    Member findMemberByNo(@Param("userNo")Long userNo);
     void updateMember(@Param("userNo") Long userNo, @Param("update") MemberDto.updateDto updateDto);
-    void delete(Long userNo);
-    Member findMember(@Param("id")String userId, @Param("password")String passWord);
+    void deleteMember(Long userNo);
+    Member findMember(@Param("id")String userId, @Param("password")String password);
+
+
 }

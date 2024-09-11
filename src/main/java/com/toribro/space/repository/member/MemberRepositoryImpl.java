@@ -37,8 +37,8 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    public Member findMemberById(Long id) {
-        return null;
+    public Member findMemberByNo(Long userNo) {
+        return memberMapper.findMemberByNo(userNo);
     }
 
     @Override
@@ -52,7 +52,8 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    public void out(Long userNo) {
-
+    public void deleteMember(Long userNo) {
+       memberMapper.deleteMember(userNo);
     }
+
 }

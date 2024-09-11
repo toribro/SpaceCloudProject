@@ -5,9 +5,9 @@ import com.toribro.space.domain.entity.member.Member;
 
 public interface MemberService {
     void save(MemberDto.CreateDto createDto);
-    Member findMemberById(Long id);
+    Member findMemberByNo(Long userNo);
     Member findMember(MemberDto.findDto findDto);//로그인 처리
     void updateMember(Long userNo,MemberDto.updateDto updateDto);
-    void out(Long userNo);
+    void deleteMember(Long userNo);
 
 }

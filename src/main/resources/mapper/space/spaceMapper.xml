@@ -96,14 +96,15 @@
                             SELECT A.SPACE_NO,SPACE_NAME,SPACE_ADDRESS,SPACE_TAG,
                                    SPACE_PRICE,SPACE_CAPACITY,FILE_PATH,ORIGIN_NAME,CHANGE_NAME
                             FROM SPACE S JOIN ATTACHMENT  A ON (S.SPACE_NO=A.SPACE_NO)
-                            WHERE FILE_LEVEL=1 AND SPACE_ENROLL_STATUS ='Y'
+                            JOIN MEMBER M ON (M.USER_NO=S.USER_NO)
+                            WHERE FILE_LEVEL=1 AND SPACE_ENROLL_STATUS ='Y' AND M.OUT_STATUS='N'
                             ORDER BY SPACE_NO DESC
                     )a)
       WHERE RN BETWEEN #{startRow} and #{endRow}
     </select>
 
-    <select id="getCount" parameterType="int">
-        SELECT COUNT(*) FROM SPACE
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM SPACE S JOIN MEMBER M ON (M.USER_NO=S.USER_NO) WHERE M.OUT_STATUS='N' AND S.SPACE_ENROLL_STATUS ='Y'
     </select>
 
     <select id="getSpace" parameterType="Space">

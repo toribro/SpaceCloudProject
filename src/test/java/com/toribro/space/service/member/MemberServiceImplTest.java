@@ -10,11 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 //파일 경로에 한글이 포함되어있으면 test코드가 안돌아갈 수있다.
 //원래는 intellig 로 바꾸면 되었는데 안된다.
@@ -47,7 +45,7 @@ class MemberServiceImplTest {
                 .build();
         memberMapper.save(member);
 
-        Member findById =  memberMapper.findByNo(member.getUserNo());
+        Member findById =  memberMapper.findMemberByNo(member.getUserNo());
         assertThat(findById ).isEqualTo(member);//equals hascode
 
     }

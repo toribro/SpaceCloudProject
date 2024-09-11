@@ -25,6 +25,10 @@ public class MainController {
         int count=spaceService.getCount();
         PageInfo spacePage= Pagination.getPageInfo(count,cpage,10,9);
         log.info("{}",count);
+        log.info("current:{}",spacePage.getCurrentPage());
+        log.info("start:{}",spacePage.getStartPage());
+        log.info("end: {}",spacePage.getEndPage());
+        log.info("max: {}",spacePage.getMaxPage());
 
         model.addAttribute("pi",spacePage);
         model.addAttribute("spList",spaceService.getSpaces(spacePage));

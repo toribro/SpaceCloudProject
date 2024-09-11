@@ -58,7 +58,7 @@
                 </tr>
                 <tr>
                     <td colspan="3" class="input-pwd">
-                        <input type="password" name="userPwd" id="userPwd" maxlength="20" placeholder="" onblur="onbcrt();onb();" required readonly>
+                        <input type="password" name="userPwd" th:field="${update.userPwd}" id="userPwd" maxlength="20" placeholder="" onblur="onbcrt();onb();" required readonly>
                     </td>
                 </tr>
 
@@ -80,7 +80,7 @@
                 </tr>
                 <tr>
                     <td colspan="3" class="input-nickname">
-                        <input type="text" id="userNickName" name="nickName" placeholder=" 특수문자 제외 최대 8글자" th:value="${loginUser?.nickName}">
+                        <input type="text" id="userNickName" name="nickName" th:field="${update.nickName}" placeholder=" 특수문자 제외 최대 8글자" >
                     </td>
                 </tr>
 
@@ -90,25 +90,24 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <input type="text" id="phone" name="phone" placeholder=" 휴대폰 번호 입력" th:value="${loginUser?.phone}">
+                        <input type="text" id="phone" name="phone" th:field="${update.phone}" placeholder=" 휴대폰 번호 입력" >
                     </td>
                 </tr>
 
             </table>
             <!-- Email Field -->
             <h4 class="email-header">이메일</h4>
-<!--            <input type="text" class="u-email" placeholder="" id="email" name="email" th:value="${#strings.substringBefore(loginUser?.email, '@')}">-->
-            <b>@</b>
-            <select class="select-email" name="select-email">
-                <option th:value="${#strings.substringAfter(loginUser?.email, '@')}" th:text="${#strings.substringAfter(loginUser?.email, '@')}"></option>
-                <option value="naver.com">naver.com</option>
-                <option value="gmail.com">gmail.com</option>
-                <option value="hanmail.net">hanmail.net</option>
-                <option value="hotmail.com">hotmail.com</option>
-                <option value="korea.com">korea.com</option>
-                <option value="nate.com">nate.com</option>
-                <option value="yahoo.com">yahoo.com</option>
-            </select>
+            <input type="text" class="u-email" placeholder="" id="email" name="email" th:field="${update.email}">
+<!--            <b>@</b>-->
+<!--            <select class="select-email" name="select-email">-->
+<!--                <option value="naver.com">naver.com</option>-->
+<!--                <option value="gmail.com">gmail.com</option>-->
+<!--                <option value="hanmail.net">hanmail.net</option>-->
+<!--                <option value="hotmail.com">hotmail.com</option>-->
+<!--                <option value="korea.com">korea.com</option>-->
+<!--                <option value="nate.com">nate.com</option>-->
+<!--                <option value="yahoo.com">yahoo.com</option>-->
+<!--            </select>-->
 
             <!-- Buttons for Save and Cancel -->
             <div class="btn-area">

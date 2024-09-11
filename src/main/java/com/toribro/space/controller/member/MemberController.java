@@ -78,20 +78,23 @@ public class MemberController {
 
     //업데이트 페이지로 이동
     @GetMapping("/{userNo}")
-    public String updateForm(){
+    public String updateForm(Model model){
         log.info("회원업데이트페이지");
+        model.addAttribute("update",new MemberDto.updateDto());
         return "member/memberUpdateForm";
     }
 
     //회원수정(u)
     @PatchMapping("/{userNo}")
-    public String update(@PathVariable Long userNo,@ModelAttribute MemberDto.updateDto updateInfo){
+    public String update(@PathVariable Long userNo,@ModelAttribute MemberDto.updateDto updateInfo,HttpSession session){
         log.info("회원업데이트");
         log.info("userNo={}",userNo);
         log.info("updateInfo.pwd={}",updateInfo.getUserPwd());//값이 안넘어오면 빈값으로 넘어온다.
 
         memberService.updateMember(userNo,updateInfo);
-
+        Member member=memberService.findMemberByNo(userNo);
+        session.setAttribute("loginUser",member);//로그인 정보 업데이트
+        session.setAttribute("alertMsg","수정 되었습니다.");
 
         return "redirect:/";//마이페이지로 리다이렉트 할것
     }
@@ -99,8 +102,13 @@ public class MemberController {
 
     //회원 탈퇴(d)
     @DeleteMapping("/{userNo}")
-    public String delete(@PathVariable int userNo){
+    public String delete(@PathVariable Long userNo,HttpSession session){
         log.info("회원탈퇴");
+
+        memberService.deleteMember(userNo);
+        session.removeAttribute("loginUser");
+        session.setAttribute("alertMsg","탈퇴 처리 되었습니다.");
+
         return "redirect:/";
     }
 
