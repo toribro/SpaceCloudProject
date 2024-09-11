@@ -53,8 +53,24 @@ class MemberRepositoryImplTest {
     }
 
     @Test
-    void findMemberById() {
+    void findMemberByNo() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate birth= LocalDate.parse("19990618",formatter);
 
+        Member member = Member.builder()
+                .userId("test3")
+                .userPwd("test3")
+                .userName("test3")
+                .nickName("test3")
+                .gender("M")
+                .email("test3@test3.com")
+                .phone("01011112223")
+                .birth(java.sql.Date.valueOf(birth))
+                .build();
+        memberMapper.save(member);
+        Member memberByNo = memberMapper.findMemberByNo(member.getUserNo());
+        log.info("member:{}",memberByNo);
+        assertThat(memberByNo).isNotNull();
 
     }
 

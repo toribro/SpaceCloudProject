@@ -46,7 +46,7 @@
                 <h2 class="menubar-logo">KH ROOMMOAH</h2>
                 <div id="right-bar" align="end">
                     <span th:text="${session.loginUser.nickName}+'님 환영합니다'">회원정보</span><br>
-                    <a th:href="@{/member}" >마이페이지</a> | <a th:href="@{/member/logout}">로그아웃</a>
+                    <a th:href="@{/member/{userNo}(userNo=${session.loginUser.userNo})}" >마이페이지</a> | <a th:href="@{/member/logout}">로그아웃</a>
                 </div>
             </div>
         </div>

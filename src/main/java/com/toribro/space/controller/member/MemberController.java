@@ -44,16 +44,18 @@ public class MemberController {
         return "member/memberUpdateForm";
     }
 
-    //마이페이지(회원조회)
-    @GetMapping
-    public String memberInfo(){
-        log.info("회원조회");
-        return "member/memberPage";
-    }
-    
+
     //회원 CRUD
     //회원가입(회원 생성)
     //서버에서의 유효성 검사 추가
+    //마이페이지(회원조회)
+    @GetMapping("/{userNo}")
+    public String memberInfo(@PathVariable Long userNo, Model model){
+        log.info("회원조회");
+        model.addAttribute("member",memberService.findMemberByNo(userNo));
+        return "member/memberPage";
+    }
+
     @PostMapping
     public String join(@Validated @ModelAttribute("member") MemberDto.CreateDto member,
                        BindingResult bindingResult, Model model , HttpSession session){

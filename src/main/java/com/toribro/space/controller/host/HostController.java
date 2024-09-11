@@ -138,4 +138,9 @@ public class HostController {
 
     }
 
+    //공간 수정
+
+
+    //공간 삭제
+
 }
