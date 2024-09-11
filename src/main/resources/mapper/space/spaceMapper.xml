@@ -14,7 +14,7 @@
 <mapper namespace="com.toribro.space.repository.space.SpaceMapper"><!-- 자바 인터페이스랑 매핑-->
 
 
-    <insert id="enrollSpace" parameterType="Space">
+    <insert id="enrollSpace">
 
         <selectKey keyProperty="space.spaceNo" resultType="int" order="BEFORE">
             SELECT space_seq.NEXTVAL FROM dual
@@ -24,7 +24,8 @@
                            SPACE_CAPACITY,
                            SPACE_PRICE,
                            SPACE_ENROLL_DATE,
-                            SPACE_ADDRESS,
+                           SPACE_MODIFY_DATE,
+                           SPACE_ADDRESS,
                            SPACE_CAUTION,
                            SPACE_DETAIL_ADDRESS,
                            SPACE_ENROLL_STATUS,
@@ -42,6 +43,7 @@
                                #{space.spaceCapacity},
                                #{space.spacePrice},
                                current_date,
+                               null,
                                #{space.spaceAddress},
                                 #{space.spaceCaution},
                                 #{space.spaceDetailAddress},
@@ -58,7 +60,7 @@
                                  #{userNo})
     </insert>
 
-    <insert id="attachmentSave" parameterType="Attachment">
+    <insert id="attachmentSave">
 
         <selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
             SELECT file_seq.NEXTVAL FROM dual
@@ -90,7 +92,7 @@
 
 <!--    </select>-->
 
-    <select id="getSpaces" parameterType="int">
+    <select id="findSpaces"  resultType="SpaceThumbnail">
       SELECT *FROM (SELECT a.* ,
                         ROWNUM AS RN FROM(
                             SELECT A.SPACE_NO,SPACE_NAME,SPACE_ADDRESS,SPACE_TAG,
@@ -107,7 +109,7 @@
         SELECT COUNT(*) FROM SPACE S JOIN MEMBER M ON (M.USER_NO=S.USER_NO) WHERE M.OUT_STATUS='N' AND S.SPACE_ENROLL_STATUS ='Y'
     </select>
 
-    <select id="getSpace" parameterType="Space">
+    <select id="findSpaceByNo" resultType="SpaceDetail">
 
         SELECT SPACE_NO,
                SPACE_CAPACITY,
@@ -132,7 +134,7 @@
 
     </select>
 
-    <select id="getAttachment" parameterType="Attachment">
+    <select id="findAttachmentByNo" resultType="Attachment">
         SELECT    FILE_NO,
                        CHANGE_NAME,
                        ORIGIN_NAME,
@@ -144,7 +146,62 @@
 
     </select>
 
+    <update id="updateSpace" >
+            UPDATE SPACE SET SPACE_MODIFY_DATE =  CURRENT_DATE
+                <choose>
+                    <when test="update.spaceName!=''">
+                        ,SPACE_NAME=#{update.spaceName}
+                    </when>
+                    <when test="update.spaceKindValues!=''">
+                        ,SPACE_KIND=#{update.spaceKindValues}
+                    </when>
+                    <when test="update.spaceOneIntroduce!=''">
+                        ,SPACE_ONE_INTRODUCE=#{update.spaceOneIntroduce}
+                    </when>
+                    <when test="update.spaceIntroduce!=''">
+                        ,SPACE_INTRODUCE=#{update.spaceIntroduce}
+                    </when>
+                    <when test="update.spaceTags!='' ">
+                        ,SPACE_TAG=#{update.spaceTags}
+                    </when>
+                    <when test="update.spaceAddress!=''">
+                        ,SPACE_ADDRESS=#{update.spaceAddress}
+                    </when>
 
+                    <when test="update.spaceDetailAddress!=''">
+                        ,SPACE_DETAIL_ADDRESS=#{update.spaceDetailAddress}
+                    </when>
+                    <when test="update.spaceTel!=''">
+                        ,SPACE_TEL=#{update.spaceTel}
+                    </when>
 
+                    <when test="update.spacePrice!=0">
+                        ,SPACE_PRICE=#{update.spacePrice}
+                    </when>
+
+                    <when test="update.spaceCapacity!=0">
+                        ,SPACE_CAPACITY=#{update.spaceCapacity}
+                    </when>
+
+                    <when test="update.spaceInformation!=''">
+                        ,SPACE_INFORMATION=#{update.spaceInformation}
+                    </when>
+
+                    <when test="update.spaceCaution!=''">
+                        ,SPACE_CAUTION=#{update.spaceCaution}
+                    </when>
+
+                    <when test="update.spaceLocation!=''">
+                        ,SPACE_LOCATION=#{update.spaceLocation}
+                    </when>
+
+                </choose>
+            WHERE SPACE_NO = #{spaceNo}
+    </update>
+
+    <update id="deleteSpace">
+            UPDATE SPACE SET SPACE_ENROLL_STATUS ='N'
+                         WHERE SPACE_NO = #{spaceNo}
+    </update>
 
 </mapper>

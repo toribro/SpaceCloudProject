@@ -10,7 +10,7 @@ $(function(){
     });
 
     document.querySelector(".spaceHome").addEventListener("click", function() {
-        location.href = "/host";
+        location.href = "/host/main";
     });
 
     document.querySelector(".notice").addEventListener("click", function() {

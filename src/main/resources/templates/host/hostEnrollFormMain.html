@@ -35,7 +35,7 @@
 
 <div id="wrapper">
     <br>
-    <form th:action="@{/host/enroll}" method="POST" enctype="multipart/form-data">
+    <form th:action="@{/space}" th:method="POST" enctype="multipart/form-data">
 
 
         <div class="login-top">
@@ -72,14 +72,12 @@
 <!--                        <div><input type="checkbox" id="seminar" name="spaceKind" value="세미나실"><label for="seminar">&nbsp세미나실</label></div>-->
 <!--                        <div><input type="checkbox" id="study" name="spaceKind" value="스터디룸"><label for="study">&nbsp스터디룸</label></div>-->
 <!--                    </div>-->
-
-                    <div th:each="spaceKind : ${space.spaceKinds}">
-                        <div>
+                    <div class="space-btns">
+                        <div th:each="spaceKind : ${space.spaceKinds}">
                             <input type="checkbox" th:id="${spaceKind.id}"  th:field="${space.spaceKind}" name="spaceKind" th:value="${spaceKind.value}">
                             <label th:for="${spaceKind.id}">&nbsp;[[${spaceKind.value}]]</label>
                         </div>
                     </div>
-
                 </td>
             </tr>
 

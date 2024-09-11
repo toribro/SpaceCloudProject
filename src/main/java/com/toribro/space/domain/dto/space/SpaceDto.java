@@ -93,5 +93,40 @@ public class SpaceDto {
     }
 
 
+    @Getter
+    @Setter
+    public static class UpdateDto{
+
+        private String spaceName;
+
+        private List<SpaceKinds> spaceKinds= Arrays.asList(
+                new SpaceKinds("party", "파티룸"),
+                new SpaceKinds("cafe", "카페"),
+                new SpaceKinds("lecture", "강의실"),
+                new SpaceKinds("meeting", "회의실"),
+                new SpaceKinds("seminar", "세미나실"),
+                new SpaceKinds("study", "스터디룸")
+        );
+
+        private List<String> spaceKind ;
+        private String spaceOneIntroduce;
+        private String spaceIntroduce;
+        private String spaceTags ;
+        private String spaceAddress;
+        private String spaceDetailAddress;
+        private String spaceTel;
+        private int spacePrice;
+        private int spaceCapacity;
+        private String spaceInformation;
+        private String spaceCaution;
+        private String spaceLocation;
+
+
+        //로직처리
+        private Long userNo;
+        private String spaceKindValues;
+    }
+
+
 
 }

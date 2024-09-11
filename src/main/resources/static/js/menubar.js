@@ -11,7 +11,7 @@ $(function(){
 
 // 호스트 페이지로 이동
     $(".side-tohost").click(function(){
-        location.href = "/host";
+        location.href = "/host/main";
     });
 
 // 공지사항 페이지로 이동

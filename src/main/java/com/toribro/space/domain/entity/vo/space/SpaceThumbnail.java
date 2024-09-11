@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SpaceAttachment {
+public class SpaceThumbnail {
 
     private int spaceNo;
     private String spaceName;

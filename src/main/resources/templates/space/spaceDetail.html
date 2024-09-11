@@ -568,7 +568,7 @@
 
     <div th:if="${session.loginUser?.userNo} == ${space.userNo}" align="center">
         <div>관리자 모드</div>
-        <button type="button" class="button" th:onclick="|location.href='@{/update?spaceNo=${space?.spaceNo}'|">수정하기</button>
+        <button type="button" class="button" th:onclick="|location.href='@{/host/update}'|">수정하기</button>
         <form action="#" method="post" style="display: inline;">
             <button type="button" class="button" onclick="cancelReservation('[[${space.spaceNo}]]')">삭제하기</button>
         </form>
