@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,24 +30,30 @@ public class MemberController {
         return "member/memberJoinForm";
     }
 
-
     //탈퇴페이지이동
     @GetMapping("/out")
     public String outForm() {
         return "member/memberOutForm";
     }
 
+    //업데이트 페이지로 이동
+    @GetMapping("/update")
+    public String updateForm(Model model){
+        log.info("회원업데이트페이지");
+        model.addAttribute("update",new MemberDto.updateDto());
+        return "member/memberUpdateForm";
+    }
 
-    //마이페이지(회원조회 R)
+    //마이페이지(회원조회)
     @GetMapping
     public String memberInfo(){
         log.info("회원조회");
         return "member/memberPage";
     }
-
-
-
-    //회원가입(회원 생성C)
+    
+    //회원 CRUD
+    //회원가입(회원 생성)
+    //서버에서의 유효성 검사 추가
     @PostMapping
     public String join(@Validated @ModelAttribute("member") MemberDto.CreateDto member,
                        BindingResult bindingResult, Model model , HttpSession session){
@@ -58,7 +63,6 @@ public class MemberController {
         Map<String, String> errors = new HashMap<>();
 
         if(!member.getUserPwd().equals(member.getUserPwdCheck())){
-//            bindingResult.reject("passworderror",new Object[]{"checkError"},null);
              errors.put("userPwdCheck","비밀번호가 일치하지 않습니다.");
              model.addAttribute("pwdError",errors);
         }
@@ -73,15 +77,6 @@ public class MemberController {
         session.setAttribute("alertMsg","회원가입 되었습니다.");
 
         return "redirect:/";
-    }
-
-
-    //업데이트 페이지로 이동
-    @GetMapping("/{userNo}")
-    public String updateForm(Model model){
-        log.info("회원업데이트페이지");
-        model.addAttribute("update",new MemberDto.updateDto());
-        return "member/memberUpdateForm";
     }
 
     //회원수정(u)
@@ -99,7 +94,6 @@ public class MemberController {
         return "redirect:/";//마이페이지로 리다이렉트 할것
     }
 
-
     //회원 탈퇴(d)
     @DeleteMapping("/{userNo}")
     public String delete(@PathVariable Long userNo,HttpSession session){
@@ -108,11 +102,8 @@ public class MemberController {
         memberService.deleteMember(userNo);
         session.removeAttribute("loginUser");
         session.setAttribute("alertMsg","탈퇴 처리 되었습니다.");
-
         return "redirect:/";
     }
-
-    //////
 
     //로그인페이지
     @GetMapping("/login")
@@ -151,11 +142,6 @@ public class MemberController {
         session.setAttribute("alertMsg","로그아웃되었습니다.");
         return "redirect:/";
     }
-
-
-
-
-
 
 
 }

@@ -31,7 +31,7 @@
 
 <div id="wrapper">
     <div class="join-user">
-        <form th:action id="login-form" th:method="patch">
+        <form th:action="@{/member/{userNo}(userNo=${session.loginUser.userNo})}" id="login-form" th:method="patch">
             <input id="userId" type="hidden" th:value="${session.loginUser?.userId}" name="userId">
 
             <table width="100%" class="tb">
