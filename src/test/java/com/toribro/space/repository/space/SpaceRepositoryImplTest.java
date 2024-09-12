@@ -31,42 +31,10 @@ class SpaceRepositoryImplTest {
     @Test
     void enroll() {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate birth= LocalDate.parse("19980416",formatter);
-
-        Member member = Member.builder()
-                .userId("tes2")
-                .userPwd("test2")
-                .userName("test2")
-                .nickName("test2")
-                .gender("M")
-                .email("test2@test2.com")
-                .phone("01011112223")
-                .birth(java.sql.Date.valueOf(birth))
-                .build();
-        memberMapper.save(member);
-
-        Space space= Space.builder()
-                .spaceName("test")
-                .spaceKind("test")
-                .spaceOneIntroduce("test")
-                .spaceIntroduce("test")
-                .spaceTag("test")
-                .spaceInformation("test")
-                .spaceCaution("test")
-                .spaceAddress("test")
-                .spaceDetailAddress("test")
-                .spacePrice(3)
-                .spaceLocation("test")
-                .spaceTel("1234-5678")
-                .spaceCapacity(3)
-                .build();
-        space.setMember(member);
-        spaceMapper.enrollSpace(member.getUserNo(), space);
-        log.info("space:{}",space);
+         Space space=initData();
 
         SpaceDetail findSpace =spaceMapper.findSpaceByNo(space.getSpaceNo());
-        assertThat(findSpace.getUserNo()).isEqualTo(member.getUserNo());
+        assertThat(findSpace.getUserNo()).isEqualTo(space.getMember().getUserNo());
 
 
     }
@@ -89,37 +57,7 @@ class SpaceRepositoryImplTest {
 
     @Test
     void updateSpace() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate birth= LocalDate.parse("19980416",formatter);
-
-        Member member = Member.builder()
-                .userId("tes2")
-                .userPwd("test2")
-                .userName("test2")
-                .nickName("test2")
-                .gender("M")
-                .email("test2@test2.com")
-                .phone("01011112223")
-                .birth(java.sql.Date.valueOf(birth))
-                .build();
-        memberMapper.save(member);
-
-        Space space= Space.builder()
-                .spaceName("test")
-                .spaceKind("test")
-                .spaceOneIntroduce("test")
-                .spaceIntroduce("test")
-                .spaceTag("test")
-                .spaceInformation("test")
-                .spaceCaution("test")
-                .spaceAddress("test")
-                .spaceDetailAddress("test")
-                .spacePrice(3)
-                .spaceLocation("test")
-                .spaceTel("1234-5678")
-                .spaceCapacity(3)
-                .build();
-        spaceMapper.enrollSpace(member.getUserNo(),space);
+        Space space = initData();
 
         //업데이트
         SpaceDto.UpdateDto updateSpace=new SpaceDto.UpdateDto();
@@ -153,5 +91,48 @@ class SpaceRepositoryImplTest {
 
     @Test
     void deleteSpace() {
+        Space space = initData();
+        spaceMapper.deleteSpace(space.getSpaceNo());
+        SpaceDetail checkSpace = spaceMapper.findSpaceByNo(space.getSpaceNo());
+        assertThat(checkSpace).isNull();
+    }
+
+
+
+
+    Space initData() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate birth= LocalDate.parse("19980416",formatter);
+
+        Member member = Member.builder()
+                .userId("tes2")
+                .userPwd("test2")
+                .userName("test2")
+                .nickName("test2")
+                .gender("M")
+                .email("test2@test2.com")
+                .phone("01011112223")
+                .birth(java.sql.Date.valueOf(birth))
+                .build();
+        memberMapper.save(member);
+
+        Space space= Space.builder()
+                .spaceName("test")
+                .spaceKind("test")
+                .spaceOneIntroduce("test")
+                .spaceIntroduce("test")
+                .spaceTag("test")
+                .spaceInformation("test")
+                .spaceCaution("test")
+                .spaceAddress("test")
+                .spaceDetailAddress("test")
+                .spacePrice(3)
+                .spaceLocation("test")
+                .spaceTel("1234-5678")
+                .spaceCapacity(3)
+                .build();
+        space.setMember(member);
+        spaceMapper.enrollSpace(space.getMember().getUserNo(),space);
+        return space;
     }
 }
