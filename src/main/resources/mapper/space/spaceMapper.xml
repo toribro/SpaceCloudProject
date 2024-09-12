@@ -199,6 +199,17 @@
             WHERE SPACE_NO = #{spaceNo}
     </update>
 
+    <update id="updateAttachment">
+        UPDATE ATTACHMENT SET FILE_PATH=#{attachment.filePath},
+                              CHANGE_NAME=#{attachment.changeName},
+                              ORIGIN_NAME=#{attachment.originName},
+                              FILE_LEVEL=#{attachment.fileLevel}
+        WHERE SPACE_NO = #{spaceNo}
+
+
+    </update>
+
+
     <update id="deleteSpace">
             UPDATE SPACE SET SPACE_ENROLL_STATUS ='N'
                          WHERE SPACE_NO = #{spaceNo}

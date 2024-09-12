@@ -40,9 +40,10 @@ public class HostController {
     public String hostEnrollPre(){
         return "host/hostEnrollFormPre";
     }
-    @GetMapping("/update")
-    public String hostUpdateForm(Model model){
+    @GetMapping("/update/{spaceNo}")
+    public String hostUpdateForm(@PathVariable int spaceNo, Model model){
         model.addAttribute("space", new SpaceDto.UpdateDto());
+        model.addAttribute("spaceNo", spaceNo);
         return "host/hostUpdateForm";
     }
     @GetMapping("/spacelist")

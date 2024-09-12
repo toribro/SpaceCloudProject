@@ -125,8 +125,11 @@ public class SpaceServiceImpl implements SpaceService {
 
         if(result<0){//실패시 원래 들어오려던 파일 삭제
             deleteExceptionFile(fileInfo);
-        }else{//업데이트가 완료되었으면 서버에 원래있던 파일 삭제
-            deleteFile(previousFile);
+        }else{//업데이트가 완료되었으면 서버에 원래있던 파일 삭제(사진이 업데이트 될때만)
+            if(result>=2){
+                deleteFile(previousFile);
+            }
+
         }
         return  result;
     }

@@ -24,7 +24,7 @@
 
     <link rel="stylesheet"  type="text/css" th:href="@{/css/host/hostUpdateForm.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/menubarHost.css}">
-    <script th:src="@{/js/host/hostUpdateFrom.js}"></script>
+    <script th:src="@{/js/host/hostUpdateForm.js}"></script>
     <script th:src="@{/js/menubarHost.js}"></script>
 </head>
 <body>
@@ -34,7 +34,7 @@
 
 <div id="wrapper">
     <br>
-    <form th:action="@{/space}" th:method="patch" enctype="multipart/form-data">
+    <form th:action="@{/space/{spaceNo}(spaceNo=${spaceNo})}" th:method="patch" enctype="multipart/form-data">
 
         <div class="login-top">
             <h2>시설물 수정</h2>
@@ -56,7 +56,7 @@
                 <td colspan="2" align="right"><span class="textCount1">0</span>/18자</td>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-name" class="input-text input-host1"  th:field="${space.spaceName}" name="spaceName" type="text" maxlength="18" placeholder="고유 업체명을 입력해주세요." required></td>
+                <td colspan="3"><input id="input-name" class="input-text input-host1"  th:field="${space.spaceName}" name="spaceName" type="text" maxlength="18" placeholder="고유 업체명을 입력해주세요." ></td>
             </tr>
 
             <tr>
@@ -85,7 +85,7 @@
                 <td colspan="2" align="right"><span class="textCount2">0</span>/27자</td>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-intro1" class="input-text input-host2" th:field="${space.spaceOneIntroduce}"  name="spaceOneIntroduce" type="text" maxlength="27" placeholder="공간의 특장점을 한 문자응로 작성해주세요." required></td>
+                <td colspan="3"><input id="input-intro1" class="input-text input-host2" th:field="${space.spaceOneIntroduce}"  name="spaceOneIntroduce" type="text" maxlength="27" placeholder="공간의 특장점을 한 문자로 작성해주세요." ></td>
             </tr>
 
             <!-- 공간 소개 -->
@@ -94,7 +94,7 @@
                 <td colspan="2" align="right"><span class="textCount3">0</span>/500자</td>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-intro2" class="input-text input-host3" th:field="${space.spaceIntroduce}" name="spaceIntroduce" type="text" maxlength="500" placeholder="게스트들에게 필요한 공간 정보를 상세하게 소개해주세요." required></td>
+                <td colspan="3"><input id="input-intro2" class="input-text input-host3" th:field="${space.spaceIntroduce}" name="spaceIntroduce" type="text" maxlength="500" placeholder="게스트들에게 필요한 공간 정보를 상세하게 소개해주세요." ></td>
             </tr>
 
             <!-- 공간 태그 -->
@@ -107,7 +107,7 @@
                 <td><button class="tag-btn" type="button" onclick="insertTag()">추가 ▼</button></td>
             </tr>
             <tr class="hidden-tag">
-                <td colspan="2" class="body80"><input class="input-text" type="text" th:field="${space.spaceTags}" name="spaceTag" readonly required></td>
+                <td colspan="2" class="body80"><input class="input-text" type="text" th:field="${space.spaceTags}" name="spaceTag" readonly ></td>
                 <td><button type="button" onclick="deleteTag()">삭제</button></td>
             </tr>
 
@@ -181,11 +181,11 @@
                 <td colspan="2" align="right"></td>
             </tr>
             <tr>
-                <td colspan="2"><input id="spaceAddress" class="input-text" type="text" th:field="${space.spaceAddress}" name="spaceAddress" placeholder="실제 서비스되는 공간의 주소를 입력해주세요." required readonly></td>
+                <td colspan="2"><input id="spaceAddress" class="input-text" type="text" th:field="${space.spaceAddress}" name="spaceAddress" placeholder="실제 서비스되는 공간의 주소를 입력해주세요."  readonly></td>
                 <td><button type="button" onclick="searchAddr()">주소 검색</button></td>
             </tr>
             <tr>
-                <td colspan="2" class="body80"><input class="input-text" th:field="${space.spaceDetailAddress}" name="spaceDetailAddress" type="text" placeholder="상세주소" required></td>
+                <td colspan="2" class="body80"><input class="input-text" th:field="${space.spaceDetailAddress}" name="spaceDetailAddress" type="text" placeholder="상세주소" ></td>
             </tr>
             <tr>
                 <th>위치 정보</th>
@@ -203,7 +203,7 @@
                 <th>가격(1인 1시간 가격)<span class="red-color">*</span></th>
             </tr>
             <tr>
-                <td colspan="3"><input id="input-price" class="input-text" th:field="${space.spacePrice}" name="spacePrice" type="number" placeholder="숫자만 입력해주세요. ex) 1000" min="0" step="100" required></td>
+                <td colspan="3"><input id="input-price" class="input-text" th:field="${space.spacePrice}" name="spacePrice" type="number" placeholder="숫자만 입력해주세요. ex) 1000" min="0" step="100" ></td>
             </tr>
 
             <!-- 전화번호 -->
@@ -212,15 +212,15 @@
                 <td colspan="1" align="right"><th>수용 인원<span class="red-color">*</span></th></td>
             </tr>
             <tr>
-                <td colspan="2"><input id="input-tel" class="input-text" type="text" th:field="${space.spaceTel}" name="spaceTel"  placeholder="'-' 없이 입력해주세요." required></td>
-                <td class="body80"><input class="input-text" th:field="${space.spaceCapacity}" name="spaceCapacity" type="number" placeholder="최대 인원" min="1" required></td>
+                <td colspan="2"><input id="input-tel" class="input-text" type="text" th:field="${space.spaceTel}" name="spaceTel"  placeholder="'-' 없이 입력해주세요." ></td>
+                <td class="body80"><input class="input-text" th:field="${space.spaceCapacity}" name="spaceCapacity" type="number" placeholder="최대 인원"  ></td>
             </tr>
         </table>
 
         <br><br>
 
         <div style="display: none;">
-            <input type="file" name="files" id="file1" required onchange="loadImg(this, 1)">
+            <input type="file" name="files" id="file1"  onchange="loadImg(this, 1)">
             <input type="file" name="files" id="file2" onchange="loadImg(this, 2)">
             <input type="file" name="files" id="file3" onchange="loadImg(this, 3)">
             <input type="file" name="files" id="file4" onchange="loadImg(this, 4)">

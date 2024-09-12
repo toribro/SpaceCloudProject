@@ -117,6 +117,7 @@ public class SpaceRepositoryImpl implements  SpaceRepository {
     public int updateSpace(int spaceNo, SpaceDto.UpdateDto updateDto, List<SpaceDto.SpaceAttachmentDto> fileInfos) {
 
         int result = -1;
+        int updateAtt=0;
         try {
             spaceMapper.updateSpace(spaceNo, updateDto);
             for (SpaceDto.SpaceAttachmentDto fileInfo : fileInfos) {
@@ -128,8 +129,9 @@ public class SpaceRepositoryImpl implements  SpaceRepository {
                         .filePath(fileInfo.getFilePath())
                         .build();
                 spaceMapper.updateAttachment(spaceNo, attachment);
+                updateAtt++;
             }
-            result = 1;
+            result = 1+updateAtt;
         } catch (MyBatisSystemException e) {
             e.printStackTrace();
         } catch (Exception e) {
